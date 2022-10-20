@@ -1,2 +1,8 @@
 <router-outlet></router-outlet>
 <p-toast></p-toast>
+<p-blockUI [blocked]="mainBlocked">
+    <p-progressSpinner></p-progressSpinner>
+    <h5>
+        {{loadingText}}
+    </h5>
+</p-blockUI>

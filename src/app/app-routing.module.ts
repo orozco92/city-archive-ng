@@ -28,6 +28,7 @@ import { PublicLayoutComponent } from './public-layout/public-layout.component';
                 component: PublicLayoutComponent,
                 children: [
                     { path: 'services', loadChildren: () => import('./main/informative-service/informative-service.module').then(m => m.InformativeServiceModule) },
+                    { path: 'testing', loadChildren: () => import('./testing/testing.module').then(m => m.TestingModule) },
                     { path: '', loadChildren: () => import('./main/landing/landing.module').then(m => m.LandingModule) }
                 ]
             },

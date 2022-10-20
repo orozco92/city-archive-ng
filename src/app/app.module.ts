@@ -14,6 +14,9 @@ import { PhotoService } from './demo/service/photo.service';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { PublicLayoutModule } from './public-layout/public-layout.module';
+import { AppLoadingService } from './core/services/app-loading.service';
+import { BlockUIModule } from 'primeng/blockui';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
     declarations: [
@@ -23,12 +26,14 @@ import { PublicLayoutModule } from './public-layout/public-layout.module';
         AppRoutingModule,
         AppLayoutModule,
         PublicLayoutModule,
-        ToastModule
+        ToastModule,
+        BlockUIModule,
+        ProgressSpinnerModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService, MessageService
+        PhotoService, ProductService, MessageService, AppLoadingService
     ],
     bootstrap: [AppComponent]
 })
