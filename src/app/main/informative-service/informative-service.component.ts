@@ -1,37 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { LazyLoadEvent, SelectItem } from 'primeng/api';
-import { IInformativeService } from 'src/app/core/models/informative-service';
+import { Component, Injector } from '@angular/core';
+import { LazyLoadEvent } from 'primeng/api';
 import { InformativeServiceService } from 'src/app/core/services/informative-service.service';
 import { IApiListQuery } from 'src/app/core/interfaces/IApiListResult';
 import { debounce } from 'lodash-es';
+import { ListComponentBase } from 'src/app/core/components/ListComponentBase';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-informative-service',
     templateUrl: './informative-service.component.html',
-    styles: []
-})
-export class InformativeServiceComponent {
+    styles: [],
 
-    products: IInformativeService[] = [];
-    sortOptions: SelectItem[] = [];
-    sortOrder: number = 0;
-    sortField: string = '';
-    searchText: string = '';
-    totalRows = 0;
-    rows = 6;
+})
+export class InformativeServiceComponent extends ListComponentBase {
 
     searchDelay = debounce(this.loadData, 500);
 
-    constructor(private service: InformativeServiceService) { }
+    constructor(injector: Injector, private service: InformativeServiceService, private router: Router) {
+        super(injector);
+    }
 
     loadData(event?: LazyLoadEvent) {
-        const q: IApiListQuery = { skip: event?.first ?? 0, limit: event?.rows ?? this.rows }
-        if (this.searchText) {
-            q.search = this.searchText;
+        const q: IApiListQuery = { skip: event?.first ?? 0, limit: event?.rows ?? this.dataListHelper.defaultRowsCountPerPage }
+        if (this.dataListHelper.searchText) {
+            q.search = this.dataListHelper.searchText;
         }
         this.service.list(q).subscribe(data => {
-            this.products = data.rows;
-            this.totalRows = data.count
+            this.dataListHelper.rows = data.rows;
+            this.dataListHelper.totalRowsCount = data.count
         })
+    }
+
+    requestService(id: number) {
+        this.router.navigate(['service-request', id])
     }
 }

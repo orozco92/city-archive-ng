@@ -1,18 +1,19 @@
 export class DataListHelper {
-    predefinedRecordsCountPerPage = [5, 10, 30, 50, 100, 250, 500];
+    predefinedRowsCountPerPage = [5, 10, 30, 50, 100, 250, 500];
 
-    defaultRecordsCountPerPopup = 10;
-    defaultRecordsCountPerPage = 30;
-    defaultRecordsCountPerPageForWidget = 5;
-    defaultRecordsCountPerScrollPage = 500;
+    defaultRowsCountPerPopup = 10;
+    defaultRowsCountPerPage = 30;
+    defaultRowsCountPerPageForWidget = 5;
+    defaultRowsCountPerScrollPage = 500;
     defaultVirtualScrollHeight = '250px';
+    searchText: string = '';
 
     isResponsive = true;
 
     resizableColumns: boolean = false;
 
-    totalRecordsCount = 0;
+    totalRowsCount = 0;
     cols: any[] = [];
-    records: any[] = [];
+    rows: any[] = [];
     loading = false;
 }
