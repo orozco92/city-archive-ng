@@ -11,34 +11,10 @@
     <div class="align-items-center surface-0 flex-grow-1 justify-content-between hidden lg:flex absolute lg:static w-full left-0 px-6 lg:px-0 z-2"
         style="top:85%">
         <ul class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row cursor-pointer">
-            <li>
-                <a (click)="router.navigate(['/'], {fragment: 'home'})" pRipple
+            <li *ngFor="let item of menuItems">
+                <a pRipple [routerLink]="item.url" [fragment]="item.fragment"
                     class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
-                    <span>Home</span>
-                </a>
-            </li>
-            <li>
-                <a (click)="router.navigate(['/'], {fragment: 'features'})" pRipple
-                    class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
-                    <span>Features</span>
-                </a>
-            </li>
-            <li>
-                <a (click)="router.navigate(['/'], {fragment: 'highlights'})" pRipple
-                    class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
-                    <span>Highlights</span>
-                </a>
-            </li>
-            <li>
-                <a (click)="router.navigate(['/'], {fragment: 'pricing'})" pRipple
-                    class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
-                    <span>Pricing</span>
-                </a>
-            </li>
-            <li>
-                <a (click)="router.navigate(['/testing'])" pRipple
-                    class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
-                    <span>Testing</span>
+                    <span>{{item.label}}</span>
                 </a>
             </li>
         </ul>
