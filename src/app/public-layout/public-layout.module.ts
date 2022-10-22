@@ -6,6 +6,7 @@ import { PublicFooterComponent } from './public-footer/public-footer.component';
 import { RouterModule } from '@angular/router';
 import { StyleClassModule } from 'primeng/styleclass';
 import { ButtonModule } from 'primeng/button';
+import { MenuModule } from 'primeng/menu';
 
 @NgModule({
     declarations: [
@@ -17,7 +18,8 @@ import { ButtonModule } from 'primeng/button';
         CommonModule,
         RouterModule,
         StyleClassModule,
-        ButtonModule
+        ButtonModule,
+        MenuModule
     ],
     exports: [
         PublicLayoutComponent

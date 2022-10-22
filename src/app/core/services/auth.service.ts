@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ProfileService } from './profile.service';
 
 @Injectable({
     providedIn: 'root'
@@ -9,7 +10,7 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
     apiUrl = environment.apiUrl
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private profileService: ProfileService) { }
 
     public isAuthenticated(): Boolean {
         let userData = localStorage.getItem('userInfo')
@@ -20,6 +21,7 @@ export class AuthService {
     }
 
     public setUserInfo(user: any) {
+
         localStorage.setItem('userInfo', JSON.stringify(user));
     }
 
@@ -32,7 +34,8 @@ export class AuthService {
 
     private setAuthFromLocalStorage(auth: any): boolean {
         if (auth && auth.token) {
-            localStorage.setItem('userInfo', JSON.stringify(auth));
+            localStorage.setItem('app-token', JSON.stringify(auth.token));
+            this.profileService.setUser(auth.user);
             return true;
         }
         return false;

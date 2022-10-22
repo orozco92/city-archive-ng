@@ -32,11 +32,11 @@ export abstract class DefaultCrudService<E> implements IApiService<E> {
     }
 
     create(data: E): Observable<E> {
-        return this.http.post<E>(`${this.apiUrl}`, { body: data });
+        return this.http.post<E>(`${this.apiUrl}`, data);
     }
 
     update(id: string | number, data: E): Observable<E> {
-        return this.http.put<E>(`${this.apiUrl}/${id}`, { body: data });
+        return this.http.put<E>(`${this.apiUrl}/${id}`, data);
     }
 
     delete(id: string | number): Observable<E> {

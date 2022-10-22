@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DestroyComponent } from 'src/app/core/components/DestroyComponent';
+import { IInformativeService } from 'src/app/core/models/informative-service';
+import { InformativeServiceService } from 'src/app/core/services/informative-service.service';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 @Component({
@@ -58,6 +61,50 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
         }
     `]
 })
-export class LandingComponent {
-    constructor(public layoutService: LayoutService, public router: Router) { }
+
+export class LandingComponent extends DestroyComponent implements OnInit {
+    services: IInformativeService[] = []
+    icons: string[] = [
+        'pi-users text-yellow-700',
+        'pi-palette text-cyan-700',
+        'pi-map text-indigo-700',
+        'pi-id-card text-bluegray-700',
+        'pi-star text-orange-700',
+        'pi-moon text-pink-700',
+        'pi-shopping-cart text-teal-700',
+        'pi-globe text-blue-700',
+        'pi-eye text-purple-700'
+    ];
+    background: string[] = [
+        'bg-yellow-200',
+        'bg-cyan-200',
+        'bg-indigo-200',
+        'bg-bluegray-200',
+        'bg-orange-200',
+        'bg-pink-200',
+        'bg-teal-200',
+        'bg-blue-200',
+        'bg-purple-200'
+    ];
+    colors: string[] = [
+        'border-yellow-50 surface-overlay border-3',
+        'border-cyan-50 surface-overlay border-3',
+        'border-indigo-50 surface-overlay border-3',
+        'border-bluegray-50 surface-overlay border-3',
+        'border-orange-50 surface-overlay border-3',
+        'border-pink-50 surface-overlay border-3',
+        'border-teal-50 surface-overlay border-3',
+        'border-blue-50 surface-overlay border-3',
+        'border-purple-50 surface-overlay border-3'
+    ];
+    constructor(public layoutService: LayoutService, public router: Router, private informativeServiceService: InformativeServiceService) {
+        super();
+    }
+    ngOnInit(): void {
+        const sub = this.informativeServiceService.list({ limit: 9, skip: 0 })
+            .subscribe(data => {
+                this.services = data.rows;
+            });
+        this.subscriptions.push(sub);
+    }
 }
