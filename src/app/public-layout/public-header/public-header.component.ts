@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppConstants } from 'src/app/core/AppConstants';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 @Component({
@@ -8,5 +9,10 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
     styleUrls: ['./public-header.component.scss']
 })
 export class PublicHeaderComponent {
-    constructor(public layoutService: LayoutService, public router: Router) { }
+    logoUrl = '';
+    companyName = AppConstants.companyName;
+    constructor(public layoutService: LayoutService, public router: Router) {
+        // this.logoUrl = `assets/layout/images/${layoutService.config.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}.svg`;
+        this.logoUrl = 'assets/images/logo.png';
+    }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppConstants } from 'src/app/core/AppConstants';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 @Component({
@@ -8,7 +9,10 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
     styleUrls: ['./public-footer.component.scss']
 })
 export class PublicFooterComponent {
-
-    constructor(public layoutService: LayoutService, public router: Router) { }
+    logoUrl = '';
+    companyName = AppConstants.companyName;
+    constructor(public layoutService: LayoutService, public router: Router) {
+        this.logoUrl = 'assets/images/logo.png';
+    }
 
 }
