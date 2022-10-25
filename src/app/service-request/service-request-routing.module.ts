@@ -5,9 +5,9 @@ import { NotarialProtocolServiceComponent } from './notarial-protocol-service/no
 import { StandardServiceComponent } from './standard-service/standard-service.component';
 
 const routes: Routes = [
-    { path: ':id', component: StandardServiceComponent },
     { path: 'foreign-index', component: ForeignIndexServiceComponent },
-    { path: 'notarial-protocol', component: NotarialProtocolServiceComponent }
+    { path: 'notarial-protocol', component: NotarialProtocolServiceComponent },
+    { path: ':id', component: StandardServiceComponent },
 ];
 
 @NgModule({

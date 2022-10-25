@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AppConstants } from 'src/app/core/AppConstants';
-import { DestroyComponent } from 'src/app/core/components/DestroyComponent';
 import { IUser } from 'src/app/core/models/user';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { ProfileService } from 'src/app/core/services/profile.service';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
@@ -11,7 +11,7 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
     selector: 'app-public-header',
     templateUrl: './public-header.component.html',
     styleUrls: ['./public-header.component.scss'],
-    providers: [ProfileService]
+    providers: [ProfileService, AuthService]
 })
 export class PublicHeaderComponent implements OnInit {
     logoUrl = '';
@@ -48,7 +48,11 @@ export class PublicHeaderComponent implements OnInit {
     ]
     user: IUser | undefined = undefined
     userMenuItems!: MenuItem[];
-    constructor(public layoutService: LayoutService, public router: Router, private profileService: ProfileService) {
+    constructor(
+        public layoutService: LayoutService,
+        public router: Router,
+        private profileService: ProfileService,
+        private authService: AuthService) {
         // this.logoUrl = `assets/layout/images/${layoutService.config.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}.svg`;
         this.logoUrl = 'assets/images/logo.png';
         this.userMenuItems = [
@@ -58,15 +62,19 @@ export class PublicHeaderComponent implements OnInit {
             {
                 label: 'Solicitudes', icon: 'pi pi-fw pi-shopping-cart'
             },
+            { separator: true },
+            {
+                label: 'Salir', icon: 'pi pi-fw pi-sign-out',
+                command: () => {
+                    authService.logout();
+                }
+            },
         ];
         this.user = profileService.getUser();
-        console.log(this.user);
-
     }
+
     ngOnInit(): void {
         this.profileService.profile.subscribe(data => {
-            console.log('asdasda');
-
             this.user = data
         })
     }

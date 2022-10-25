@@ -32,6 +32,11 @@ export class AuthService {
             )
     }
 
+    public logout() {
+        localStorage.removeItem('app-token');
+        this.profileService.setUser(undefined);
+    }
+
     private setAuthFromLocalStorage(auth: any): boolean {
         if (auth && auth.token) {
             localStorage.setItem('app-token', JSON.stringify(auth.token));

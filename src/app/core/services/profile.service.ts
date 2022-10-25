@@ -9,14 +9,14 @@ import { IUser } from '../models/user';
 })
 export class ProfileService {
     apiUrl = environment.apiUrl + '/profile'
-    profile = new Subject<IUser>();
+    profile = new Subject<IUser | undefined>();
 
     currentUser: IUser | undefined = undefined;
 
     constructor(private http: HttpClient) {
     }
 
-    setUser(user: IUser) {
+    setUser(user?: IUser) {
         this.currentUser = user
         localStorage.setItem('profile', JSON.stringify(user));
         this.profile.next(user);
