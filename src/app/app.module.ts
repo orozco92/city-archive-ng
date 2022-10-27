@@ -11,6 +11,14 @@ import { EventService } from './demo/service/event.service';
 import { IconService } from './demo/service/icon.service';
 import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { PublicLayoutModule } from './public-layout/public-layout.module';
+import { AppLoadingService } from './core/services/app-loading.service';
+import { BlockUIModule } from 'primeng/blockui';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './core/interceptors/jwt-interceptor.service';
 
 @NgModule({
     declarations: [
@@ -18,12 +26,21 @@ import { PhotoService } from './demo/service/photo.service';
     ],
     imports: [
         AppRoutingModule,
-        AppLayoutModule
+        AppLayoutModule,
+        PublicLayoutModule,
+        ToastModule,
+        BlockUIModule,
+        ProgressSpinnerModule
     ],
     providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: JwtInterceptor,
+            multi: true
+        },
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService
+        PhotoService, ProductService, MessageService, ConfirmationService, AppLoadingService
     ],
     bootstrap: [AppComponent]
 })

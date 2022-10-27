@@ -2,12 +2,13 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { NotfoundComponent } from './demo/components/notfound/notfound.component';
 import { AppLayoutComponent } from "./layout/app.layout.component";
+import { PublicLayoutComponent } from './public-layout/public-layout.component';
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
             {
-                path: '', component: AppLayoutComponent,
+                path: 'admin', component: AppLayoutComponent,
                 children: [
                     { path: '', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
                     { path: 'uikit', loadChildren: () => import('./demo/components/uikit/uikit.module').then(m => m.UikitModule) },
@@ -17,9 +18,19 @@ import { AppLayoutComponent } from "./layout/app.layout.component";
                     { path: 'pages', loadChildren: () => import('./demo/components/pages/pages.module').then(m => m.PagesModule) },
                 ],
             },
-            { path: 'auth', loadChildren: () => import('./demo/components/auth/auth.module').then(m => m.AuthModule) },
-            { path: 'landing', loadChildren: () => import('./demo/components/landing/landing.module').then(m => m.LandingModule) },
+            {
+                path: 'auth',
+                loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+            },
             { path: 'pages/notfound', component: NotfoundComponent },
+            {
+                path: '',
+                component: PublicLayoutComponent,
+                children: [
+                    { path: 'testing', loadChildren: () => import('./testing/testing.module').then(m => m.TestingModule) },
+                    { path: '', loadChildren: () => import('./main/main.module').then(m => m.MainModule) }
+                ]
+            },
             { path: '**', redirectTo: 'pages/notfound' },
         ], { scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled', onSameUrlNavigation: 'reload' })
     ],
