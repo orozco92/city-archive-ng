@@ -23,23 +23,16 @@ export class PublicHeaderComponent implements OnInit {
             fragment: 'home'
         },
         {
-            url: '/',
+            url: '/services',
             label: 'Servicios',
-            fragment: 'features'
         },
         {
-            url: '/',
-            label: 'Highlights',
-            fragment: 'highlights'
-        },
-        {
-            url: '/',
-            label: 'Pricing',
-            fragment: 'pricing'
+            url: '/about-us',
+            label: 'Sobre nosotros',
         },
         {
             url: '/admin',
-            label: 'Administracion',
+            label: 'Administración',
         },
         {
             url: '/testing',
@@ -52,15 +45,21 @@ export class PublicHeaderComponent implements OnInit {
         public layoutService: LayoutService,
         public router: Router,
         private profileService: ProfileService,
-        private authService: AuthService) {
+        authService: AuthService) {
         // this.logoUrl = `assets/layout/images/${layoutService.config.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}.svg`;
         this.logoUrl = 'assets/images/logo.png';
         this.userMenuItems = [
             {
                 label: 'Mi perfil', icon: 'pi pi-fw pi-user', routerLink: '/profile',
+                queryParams: {
+                    tab: 'personal-data'
+                }
             },
             {
-                label: 'Solicitudes', icon: 'pi pi-fw pi-shopping-cart', routerLink: '/profile/service-requests'
+                label: 'Solicitudes', icon: 'pi pi-fw pi-shopping-cart', routerLink: '/profile',
+                queryParams: {
+                    tab: 'my-services'
+                }
             },
             { separator: true },
             {
@@ -75,8 +74,6 @@ export class PublicHeaderComponent implements OnInit {
 
     ngOnInit(): void {
         this.profileService.profile.subscribe(data => {
-            console.log(1111);
-
             this.user = data
         })
     }
