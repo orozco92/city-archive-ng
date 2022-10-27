@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { pick } from 'lodash-es';
 import { MessageServiceSeverityEnum } from 'src/app/core/AppConstants';
@@ -9,6 +9,7 @@ import { IServiceRequest } from 'src/app/core/models/service-request';
 import { InformativeServiceService } from 'src/app/core/services/informative-service.service';
 import { ProfileService } from 'src/app/core/services/profile.service';
 import { ServiceRequestService } from 'src/app/core/services/service-requests.service';
+import { ProfilePersonalDataComponent } from 'src/app/shared/profile-personal-data/profile-personal-data.component';
 
 @Component({
     selector: 'app-standard-service',
@@ -17,9 +18,10 @@ import { ServiceRequestService } from 'src/app/core/services/service-requests.se
 })
 export class StandardServiceComponent extends AppComponentBase implements OnInit {
 
-    serviceName = 'busqueda de algo';
     service: Partial<IInformativeService> = {};
     serviceRequest: Partial<IServiceRequest> = {};
+    @ViewChild(ProfilePersonalDataComponent)
+    profileComponent!: ProfilePersonalDataComponent;
 
     constructor(
         injector: Injector,
@@ -27,7 +29,6 @@ export class StandardServiceComponent extends AppComponentBase implements OnInit
         private informativeService: InformativeServiceService,
         private route: ActivatedRoute,
         private location: Location,
-        private profileService: ProfileService
     ) {
         super(injector);
     }
@@ -43,6 +44,7 @@ export class StandardServiceComponent extends AppComponentBase implements OnInit
 
     save(): void {
         const summary = 'Solicitud de servicio';
+        Object.assign(this.serviceRequest, this.profileComponent.getUser())
         this.serviceRequest.InformativeServiceId = this.service.id;
         const sub = this.serviceRequestService.create(this.serviceRequest as IServiceRequest)
             .subscribe({
@@ -60,10 +62,11 @@ export class StandardServiceComponent extends AppComponentBase implements OnInit
             });
         this.subscriptions.push(sub)
     }
+
     importProfileData() {
-        const profile = this.profileService.getUser();
-        this.serviceRequest = pick(profile, ["ci", "name", "lastName", "email", "address", "nationality"])
+        this.profileComponent.loadFromProfile();
     }
+
     back() {
         this.location.back()
     }

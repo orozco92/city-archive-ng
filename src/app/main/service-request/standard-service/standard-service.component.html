@@ -2,32 +2,7 @@
     <div class="col-12">
         <div class="card">
             <h5>Solicitar servicio de {{service.name}}</h5>
-            <div class="p-fluid p-formgrid grid">
-                <div class="field col-12 md:col-6">
-                    <label htmlFor="name">Nombre</label>
-                    <input pInputText id="name" name="name" [(ngModel)]="serviceRequest.name" type="text" />
-                </div>
-                <div class="field col-12 md:col-6">
-                    <label htmlFor="lastname">Apellidos</label>
-                    <input pInputText id="lastname" [(ngModel)]="serviceRequest.lastName" type="text" />
-                </div>
-                <div class="field col-12 md:col-6">
-                    <label htmlFor="ci">CI</label>
-                    <input pInputText id="ci" [(ngModel)]="serviceRequest.ci" type="text" />
-                </div>
-                <div class="field col-12 md:col-6">
-                    <label htmlFor="email">Correo electrónico</label>
-                    <input pInputText id="email" type="email" [(ngModel)]="serviceRequest.email" />
-                </div>
-                <div class="field col-12">
-                    <label htmlFor="address">Dirección</label>
-                    <textarea pInputTextarea id="address" rows="4" [(ngModel)]="serviceRequest.address"></textarea>
-                </div>
-                <div class="field col-12 md:col-3">
-                    <label htmlFor="nationality">Nacionalidad</label>
-                    <input pInputText id="nationality" type="text" [(ngModel)]="serviceRequest.nationality" />
-                </div>
-            </div>
+            <app-profile-personal-data></app-profile-personal-data>
             <div class="p-card-footer">
                 <button pButton class="mr-5" label="Solicitar" (click)="save()"></button>
                 <button pButton class="p-button-secondary mr-5" label="Importar datos desde mi perfil"

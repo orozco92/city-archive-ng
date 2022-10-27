@@ -1,22 +1,30 @@
 import { Component, Inject, Injector, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LazyLoadEvent } from 'primeng/api';
+import { MessageServiceSeverityEnum } from 'src/app/core/AppConstants';
+import { CrudComponentBase } from 'src/app/core/components/CrudComponentBase';
 import { ListComponentBase } from 'src/app/core/components/ListComponentBase';
 import { ServiceRequestStatusHelper } from 'src/app/core/helpers/ServiceRequestStatusHelper';
 import { IApiListQuery } from 'src/app/core/interfaces/IApiListResult';
 import { ProfileService } from 'src/app/core/services/profile.service';
+import { ServiceRequestService } from 'src/app/core/services/service-requests.service';
 
 @Component({
     selector: 'app-my-services',
-    templateUrl: './my-services.component.html',
-    styles: [
-    ]
+    templateUrl: './my-services.component.html'
 })
-export class MyServicesComponent extends ListComponentBase {
+export class MyServicesComponent extends CrudComponentBase {
 
     statusHelper = new ServiceRequestStatusHelper();
 
-    constructor(injector: Injector, private profileService: ProfileService) {
+    constructor(
+        injector: Injector,
+        private profileService: ProfileService,
+        private serviceRequestService: ServiceRequestService,
+        private router: Router) {
         super(injector);
+        this.deleteHeader = 'Emilinar solicitud'
+        this.deleteMessage = 'Esta seguro que desea eliminar la solicitud?'
     }
 
     loadData(event?: LazyLoadEvent) {
@@ -32,4 +40,17 @@ export class MyServicesComponent extends ListComponentBase {
                 this.dataListHelper.loading = false;
             })
     }
+
+    deleteItem(item: any) {
+        this.serviceRequestService.delete(item.id)
+            .subscribe(data => {
+                this.message.add({ summary: 'Servicio eliminado', severity: MessageServiceSeverityEnum.SUCCESS });
+            })
+    }
+
+    editItem(item: any) {
+        this.router.navigate(['main', 'service-request', item.id])
+    }
+
+
 }

@@ -1,29 +1,4 @@
-<div class="p-fluid p-formgrid grid">
-    <div class="field col-12 md:col-6">
-        <label htmlFor="name">Nombre</label>
-        <input pInputText id="name" name="name" [(ngModel)]="user.name" type="text" />
-    </div>
-    <div class="field col-12 md:col-6">
-        <label htmlFor="lastname">Apellidos</label>
-        <input pInputText id="lastname" [(ngModel)]="user.lastName" type="text" />
-    </div>
-    <div class="field col-12 md:col-6">
-        <label htmlFor="ci">CI</label>
-        <input pInputText id="ci" [(ngModel)]="user.ci" type="text" />
-    </div>
-    <div class="field col-12 md:col-6">
-        <label htmlFor="email">Correo electrónico</label>
-        <input pInputText id="email" type="email" [(ngModel)]="user.email" />
-    </div>
-    <div class="field col-12">
-        <label htmlFor="address">Dirección</label>
-        <textarea pInputTextarea id="address" rows="4" [(ngModel)]="user.address"></textarea>
-    </div>
-    <div class="field col-12 md:col-3">
-        <label htmlFor="nationality">Nacionalidad</label>
-        <input pInputText id="nationality" type="text" [(ngModel)]="user.nationality" />
-    </div>
-</div>
+<app-profile-personal-data [loadProfile]="true"></app-profile-personal-data>
 <div class="p-formgrid grid">
     <div class="col-12 md:col-3">
         <button pButton class="mr-5" label="Guardar" (click)="save()"></button>

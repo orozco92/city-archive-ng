@@ -97,6 +97,21 @@ export class LandingComponent extends DestroyComponent implements OnInit {
         'border-blue-50 surface-overlay border-3',
         'border-purple-50 surface-overlay border-3'
     ];
+
+    activities: any[] = [
+        {
+            title: 'Procesos técnicos',
+            description: `Consiste en el procesamiento de los fondos y colecciones utilizando las Normas Internacionales y la
+            recepción e ingreso de los fondos y colecciones.`,
+            image: 'assets/demo/images/landing/mockup.svg'
+        },
+        {
+            title: 'Conservación y restauración',
+            description: `Se encarga de la conservación del patrimonio documental. Su función es evitar  o detener el deterioro progresivo de las
+            fuentes y hacer cumplir la legislación vigente`,
+            image: 'assets/demo/images/landing/mockup-desktop.svg'
+        }
+    ]
     constructor(public layoutService: LayoutService, public router: Router, private informativeServiceService: InformativeServiceService) {
         super();
     }

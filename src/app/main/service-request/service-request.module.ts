@@ -10,6 +10,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
+import { ProfilePersonalDataModule } from 'src/app/shared/profile-personal-data/profile-personal-data.module';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { FormsModule } from '@angular/forms';
         ServiceRequestRoutingModule,
         InputTextModule,
         InputTextareaModule,
-        ButtonModule
+        ButtonModule,
+        ProfilePersonalDataModule
     ]
 })
 export class ServiceRequestModule { }

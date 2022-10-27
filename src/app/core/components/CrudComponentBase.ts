@@ -13,6 +13,8 @@ export abstract class CrudComponentBase extends ListComponentBase {
     }
 
     confirmDelete(item: any) {
+        console.log(123123);
+
         this.confirmationService.confirm({
             message: this.deleteMessage,
             header: this.deleteHeader,
@@ -20,7 +22,7 @@ export abstract class CrudComponentBase extends ListComponentBase {
         });
     }
 
-    abstract deleteItem(item: any): never;
+    abstract deleteItem(item: any): void;
 
-    abstract editItem(item: any): never;
+    abstract editItem(item: any): void;
 }

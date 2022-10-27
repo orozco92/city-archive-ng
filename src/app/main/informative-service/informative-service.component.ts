@@ -32,6 +32,6 @@ export class InformativeServiceComponent extends ListComponentBase {
     }
 
     requestService(id: number) {
-        this.router.navigate(['service-request', id])
+        this.router.navigate(['main', 'service-request', id])
     }
 }

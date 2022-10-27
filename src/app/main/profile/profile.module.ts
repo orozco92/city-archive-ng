@@ -12,6 +12,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { ProfileService } from 'src/app/core/services/profile.service';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ProfilePersonalDataModule } from 'src/app/shared/profile-personal-data/profile-personal-data.module';
 
 @NgModule({
     declarations: [
@@ -26,8 +28,9 @@ import { ProfileService } from 'src/app/core/services/profile.service';
         TabViewModule,
         FormsModule,
         InputTextModule,
-        InputTextareaModule,
-        ButtonModule
+        ButtonModule,
+        ConfirmDialogModule,
+        ProfilePersonalDataModule
     ],
     providers: []
 })
