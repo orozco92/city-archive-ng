@@ -25,9 +25,6 @@ export class ProfileService {
         } else {
             localStorage.removeItem('profile')
         }
-        console.log(1111);
-        console.log(user);
-
         this.profile.next(user);
     }
 

@@ -1,8 +1,6 @@
-import { Component, Injector, OnInit } from '@angular/core';
-import { LazyLoadEvent } from 'primeng/api';
+import { Component, Injector } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ListComponentBase } from 'src/app/core/components/ListComponentBase';
-import { IApiListQuery } from 'src/app/core/interfaces/IApiListResult';
-import { ServiceRequestService } from 'src/app/core/services/service-requests.service';
 
 @Component({
     selector: 'app-profile',
@@ -11,8 +9,20 @@ import { ServiceRequestService } from 'src/app/core/services/service-requests.se
 })
 export class ProfileComponent extends ListComponentBase {
 
-    constructor(injector: Injector, private serviceRequestService: ServiceRequestService) {
+    activeTab: string | null = null;
+    constructor(injector: Injector, private route: ActivatedRoute) {
         super(injector);
+        const tab = route.snapshot.queryParamMap.get('tab');
+        switch (tab) {
+            case 'personal-data':
+                this.activeTab = 'personal-data';
+                break;
+            case 'my-services':
+                this.activeTab = 'my-services';
+                break;
+            default:
+                this.activeTab = 'personal-data';
+        }
     }
 
 

@@ -1,6 +1,7 @@
 import { Component, Inject, Injector, OnInit } from '@angular/core';
 import { LazyLoadEvent } from 'primeng/api';
 import { ListComponentBase } from 'src/app/core/components/ListComponentBase';
+import { ServiceRequestStatusHelper } from 'src/app/core/helpers/ServiceRequestStatusHelper';
 import { IApiListQuery } from 'src/app/core/interfaces/IApiListResult';
 import { ProfileService } from 'src/app/core/services/profile.service';
 
@@ -12,14 +13,14 @@ import { ProfileService } from 'src/app/core/services/profile.service';
 })
 export class MyServicesComponent extends ListComponentBase {
 
+    statusHelper = new ServiceRequestStatusHelper();
+
     constructor(injector: Injector, private profileService: ProfileService) {
         super(injector);
     }
 
-    ngOnInit(): void {
-    }
-
     loadData(event?: LazyLoadEvent) {
+        this.dataListHelper.loading = true;
         const q: IApiListQuery = { skip: event?.first ?? 0, limit: event?.rows ?? this.dataListHelper.defaultRowsCountPerPage }
         if (this.dataListHelper.searchText) {
             q.search = this.dataListHelper.searchText;
@@ -28,6 +29,7 @@ export class MyServicesComponent extends ListComponentBase {
             .subscribe(data => {
                 this.dataListHelper.rows = data.rows;
                 this.dataListHelper.totalRowsCount = data.count
+                this.dataListHelper.loading = false;
             })
     }
 }

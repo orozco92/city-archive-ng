@@ -1,7 +1,7 @@
-<p-table #dt [value]="dataListHelper.rows" responsiveLayout="scroll" [rows]="dataListHelper.defaultRowsCountPerPage"
-    [paginator]="true" [rowsPerPageOptions]="dataListHelper.predefinedRowsCountPerPage" [showCurrentPageReport]="true"
-    currentPageReportTemplate="Motrando {first} de {last} para {totalRecords} elementos" [rowHover]="true" dataKey="id"
-    [lazy]="true" (onLazyLoad)="loadData($event)">
+<p-table #dt [value]="dataListHelper.rows" responsiveLayout="scroll" [paginator]="true"
+    [rowsPerPageOptions]="dataListHelper.predefinedRowsCountPerPage" [rows]="dataListHelper.defaultRowsCountPerPage"
+    [totalRecords]="dataListHelper.totalRowsCount" [rowHover]="true" dataKey="id" [lazy]="true"
+    (onLazyLoad)="loadData($event)" [loading]="dataListHelper.loading">
     <ng-template pTemplate="caption">
         <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
             <h5 class="m-0">Mis solucitudes</h5>
@@ -38,7 +38,9 @@
                 {{product.InformativeService?.price | currency:'USD'}}
             </td>
             <td style="min-width: 10rem;"><span class="p-column-title">Estado</span>
-                <span [class]="'product-badge status-success'">{{product.status}}</span>
+                <span class="p-badge text-base pl-3 pr-3" [ngClass]="statusHelper.getStatusLabelStyle(product.status)">
+                    {{statusHelper.getStatusTranslation(product.status)}}
+                </span>
             </td>
             <td>
                 <div class="flex">

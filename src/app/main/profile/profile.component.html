@@ -1,9 +1,9 @@
 <div class="card">
     <p-tabView>
-        <p-tabPanel header="Datos personales" leftIcon="pi pi-user">
+        <p-tabPanel header="Datos personales" leftIcon="pi pi-user" [selected]="activeTab == 'personal-data'">
             <app-personal-data></app-personal-data>
         </p-tabPanel>
-        <p-tabPanel header="Mis solicitudes" leftIcon="pi pi-shopping-cart">
+        <p-tabPanel header="Mis solicitudes" leftIcon="pi pi-shopping-cart" [selected]="activeTab == 'my-services'">
             <app-my-services></app-my-services>
         </p-tabPanel>
     </p-tabView>

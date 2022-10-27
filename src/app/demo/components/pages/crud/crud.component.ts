@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/demo/api/product';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { ProductService } from 'src/app/demo/service/product.service';
 
 @Component({
     templateUrl: './crud.component.html',
-    providers: [MessageService]
+    providers: [MessageService, ConfirmationService]
 })
 export class CrudComponent implements OnInit {
 
@@ -30,7 +30,9 @@ export class CrudComponent implements OnInit {
 
     rowsPerPageOptions = [5, 10, 20];
 
-    constructor(private productService: ProductService, private messageService: MessageService) { }
+    constructor(private productService: ProductService,
+        private messageService: MessageService,
+        private confirmationService: ConfirmationService) { }
 
     ngOnInit() {
         this.productService.getProducts().then(data => this.products = data);
@@ -66,15 +68,30 @@ export class CrudComponent implements OnInit {
     }
 
     deleteProduct(product: Product) {
-        this.deleteProductDialog = true;
-        this.product = { ...product };
+        // this.deleteProductDialog = true;
+        this.confirmationService.confirm({
+            message: 'Are you sure that you want to perform this action?',
+            accept: () => {
+                //Actual logic to perform a confirmation
+                this.products = this.products.filter(val => !this.selectedProducts.includes(val));
+                this.selectedProducts = [];
+                this.product = { ...product };
+            }
+        });
+
     }
 
     confirmDeleteSelected() {
-        this.deleteProductsDialog = false;
-        this.products = this.products.filter(val => !this.selectedProducts.includes(val));
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
-        this.selectedProducts = [];
+        this.confirmationService.confirm({
+            message: 'Are you sure that you want to perform this action?',
+            accept: () => {
+                //Actual logic to perform a confirmation
+                this.products = this.products.filter(val => !this.selectedProducts.includes(val));
+                this.selectedProducts = [];
+            }
+        });
+        // this.deleteProductsDialog = false;
+        // this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
     }
 
     confirmDelete() {

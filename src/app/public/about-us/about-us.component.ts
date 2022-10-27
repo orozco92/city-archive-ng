@@ -7,8 +7,7 @@ interface IActivity {
 }
 @Component({
     selector: 'app-about-us',
-    templateUrl: './about-us.component.html',
-    styleUrls: ['./about-us.component.scss']
+    templateUrl: './about-us.component.html'
 })
 export class AboutUsComponent implements OnInit {
 

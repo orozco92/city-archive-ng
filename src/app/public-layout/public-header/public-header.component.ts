@@ -23,21 +23,21 @@ export class PublicHeaderComponent implements OnInit {
             fragment: 'home'
         },
         {
-            url: '/services',
+            url: '/main/services',
             label: 'Servicios',
         },
         {
             url: '/about-us',
             label: 'Sobre nosotros',
         },
-        {
-            url: '/admin',
-            label: 'Administración',
-        },
-        {
-            url: '/testing',
-            label: 'Testing',
-        }
+        // {
+        //     url: '/admin',
+        //     label: 'Administración',
+        // },
+        // {
+        //     url: '/testing',
+        //     label: 'Testing',
+        // }
     ]
     user: IUser | undefined = undefined
     userMenuItems!: MenuItem[];
@@ -50,13 +50,13 @@ export class PublicHeaderComponent implements OnInit {
         this.logoUrl = 'assets/images/logo.png';
         this.userMenuItems = [
             {
-                label: 'Mi perfil', icon: 'pi pi-fw pi-user', routerLink: '/profile',
+                label: 'Mi perfil', icon: 'pi pi-fw pi-user', routerLink: '/main/profile',
                 queryParams: {
                     tab: 'personal-data'
                 }
             },
             {
-                label: 'Solicitudes', icon: 'pi pi-fw pi-shopping-cart', routerLink: '/profile',
+                label: 'Solicitudes', icon: 'pi pi-fw pi-shopping-cart', routerLink: '/main/profile',
                 queryParams: {
                     tab: 'my-services'
                 }

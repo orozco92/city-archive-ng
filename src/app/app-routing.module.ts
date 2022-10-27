@@ -24,11 +24,18 @@ import { PublicLayoutComponent } from './public-layout/public-layout.component';
             },
             { path: 'pages/notfound', component: NotfoundComponent },
             {
-                path: '',
+                path: 'main',
                 component: PublicLayoutComponent,
                 children: [
                     { path: 'testing', loadChildren: () => import('./testing/testing.module').then(m => m.TestingModule) },
                     { path: '', loadChildren: () => import('./main/main.module').then(m => m.MainModule) }
+                ]
+            },
+            {
+                path: '',
+                component: PublicLayoutComponent,
+                children: [
+                    { path: '', loadChildren: () => import('./public/public.module').then(m => m.PublicModule) }
                 ]
             },
             { path: '**', redirectTo: 'pages/notfound' },
