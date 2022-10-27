@@ -15,16 +15,6 @@ export class ProfileComponent extends ListComponentBase {
         super(injector);
     }
 
-    loadData(event?: LazyLoadEvent) {
-        const q: IApiListQuery = { skip: event?.first ?? 0, limit: event?.rows ?? this.dataListHelper.defaultRowsCountPerPage }
-        if (this.dataListHelper.searchText) {
-            q.search = this.dataListHelper.searchText;
-        }
-        this.serviceRequestService.list(q).subscribe(data => {
-            this.dataListHelper.rows = data.rows;
-            this.dataListHelper.totalRowsCount = data.count
-        })
-    }
 
     ngOnInit(): void {
     }

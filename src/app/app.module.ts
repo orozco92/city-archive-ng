@@ -17,6 +17,8 @@ import { PublicLayoutModule } from './public-layout/public-layout.module';
 import { AppLoadingService } from './core/services/app-loading.service';
 import { BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './core/interceptors/jwt-interceptor.service';
 
 @NgModule({
     declarations: [
@@ -31,6 +33,11 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
         ProgressSpinnerModule
     ],
     providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: JwtInterceptor,
+            multi: true
+        },
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         CountryService, CustomerService, EventService, IconService, NodeService,
         PhotoService, ProductService, MessageService, ConfirmationService, AppLoadingService

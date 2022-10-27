@@ -1,11 +1,13 @@
 import { Location } from '@angular/common';
 import { Component, Injector, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { pick } from 'lodash-es';
 import { MessageServiceSeverityEnum } from 'src/app/core/AppConstants';
 import { AppComponentBase } from 'src/app/core/components/AppComponentBase';
 import { IInformativeService } from 'src/app/core/models/informative-service';
 import { IServiceRequest } from 'src/app/core/models/service-request';
 import { InformativeServiceService } from 'src/app/core/services/informative-service.service';
+import { ProfileService } from 'src/app/core/services/profile.service';
 import { ServiceRequestService } from 'src/app/core/services/service-requests.service';
 
 @Component({
@@ -24,7 +26,8 @@ export class StandardServiceComponent extends AppComponentBase implements OnInit
         private serviceRequestService: ServiceRequestService,
         private informativeService: InformativeServiceService,
         private route: ActivatedRoute,
-        private location: Location
+        private location: Location,
+        private profileService: ProfileService
     ) {
         super(injector);
     }
@@ -56,6 +59,10 @@ export class StandardServiceComponent extends AppComponentBase implements OnInit
                 }
             });
         this.subscriptions.push(sub)
+    }
+    importProfileData() {
+        const profile = this.profileService.getUser();
+        this.serviceRequest = pick(profile, ["ci", "name", "lastName", "email", "address", "nationality"])
     }
     back() {
         this.location.back()

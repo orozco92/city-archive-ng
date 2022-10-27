@@ -1,7 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Subject } from 'rxjs';
+import { map, Observable, Subject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { IApiListQuery, IApiListResult } from '../interfaces/IApiListResult';
+import { IServiceRequest } from '../models/service-request';
 import { IUser } from '../models/user';
 
 @Injectable({
@@ -18,7 +20,14 @@ export class ProfileService {
 
     setUser(user?: IUser) {
         this.currentUser = user
-        localStorage.setItem('profile', JSON.stringify(user));
+        if (user) {
+            localStorage.setItem('profile', JSON.stringify(user));
+        } else {
+            localStorage.removeItem('profile')
+        }
+        console.log(1111);
+        console.log(user);
+
         this.profile.next(user);
     }
 
@@ -29,4 +38,23 @@ export class ProfileService {
         }
         return this.currentUser;
     }
+
+    update(data: IUser): Observable<IUser> {
+        return this.http.put<IUser>(this.apiUrl, data)
+            .pipe(tap(data => {
+                this.setUser(data)
+                return data;
+            }));
+    }
+
+    myServices(query: IApiListQuery): Observable<IApiListResult<IServiceRequest>> {
+        let params = new HttpParams();
+        for (const key in query) {
+            if (Object.prototype.hasOwnProperty.call(query, key)) {
+                params = params.append(key, query[key])
+            }
+        }
+        return this.http.get<IApiListResult<IServiceRequest>>(this.apiUrl + '/my-services', { params });
+    }
+
 }

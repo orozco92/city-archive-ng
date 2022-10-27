@@ -57,10 +57,10 @@ export class PublicHeaderComponent implements OnInit {
         this.logoUrl = 'assets/images/logo.png';
         this.userMenuItems = [
             {
-                label: 'Mi perfil', icon: 'pi pi-fw pi-user'
+                label: 'Mi perfil', icon: 'pi pi-fw pi-user', routerLink: '/profile',
             },
             {
-                label: 'Solicitudes', icon: 'pi pi-fw pi-shopping-cart'
+                label: 'Solicitudes', icon: 'pi pi-fw pi-shopping-cart', routerLink: '/profile/service-requests'
             },
             { separator: true },
             {
@@ -75,6 +75,8 @@ export class PublicHeaderComponent implements OnInit {
 
     ngOnInit(): void {
         this.profileService.profile.subscribe(data => {
+            console.log(1111);
+
             this.user = data
         })
     }

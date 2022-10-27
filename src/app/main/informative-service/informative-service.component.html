@@ -28,7 +28,7 @@
                             <div
                                 class="flex flex-row md:flex-column justify-content-between w-full md:w-auto align-items-center md:align-items-end mt-5 md:mt-0">
                                 <span class="text-2xl font-semibold mb-2 align-self-center md:align-self-end">
-                                    {{item.priceNative | currency }} / {{item.priceForeign | currency }}
+                                    {{item.price | currency }}
                                 </span>
                                 <p-button icon="pi pi-shopping-cart" label="Solicitar servicio" class="mb-2"
                                     (onClick)="requestService(item.id)"></p-button>
@@ -48,7 +48,7 @@
                             </div>
                             <div class="flex align-items-center justify-content-between">
                                 <span class="text-2xl font-semibold">
-                                    {{item.priceNative | currency }} / {{item.priceForeign | currency }}
+                                    {{item.price | currency }}
                                 </span>
                                 <p-button icon="pi pi-shopping-cart" (onClick)="requestService(item.id)"></p-button>
                             </div>
