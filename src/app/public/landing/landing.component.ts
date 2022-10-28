@@ -103,13 +103,26 @@ export class LandingComponent extends DestroyComponent implements OnInit {
             title: 'Procesos técnicos',
             description: `Consiste en el procesamiento de los fondos y colecciones utilizando las Normas Internacionales y la
             recepción e ingreso de los fondos y colecciones.`,
-            image: 'assets/demo/images/landing/mockup.svg'
+            image: 'assets/images/digitalizacion-documentos.jpg',
         },
         {
             title: 'Conservación y restauración',
-            description: `Se encarga de la conservación del patrimonio documental. Su función es evitar  o detener el deterioro progresivo de las
+            description: `Se encarga de la conservación del patrimonio documental. Su función es evitar o detener el deterioro progresivo de las
             fuentes y hacer cumplir la legislación vigente`,
-            image: 'assets/demo/images/landing/mockup-desktop.svg'
+            image: 'assets/images/conservacion_libro.jpg'
+        },
+        {
+            title: 'Servicios informativos',
+            description: `En ella se orientan y pone a disposición de los usuarios la documentación que soliciten sobre los fondos y colecciones.
+            También tiene a su cargo la custodia de los 41 fondos con que cuenta el AHPH`,
+            image: 'assets/images/busqueda_documental.jpg'
+        },
+        {
+            title: 'Fondos y colecciones',
+            description: `Es la encargada de la Informatización y Automatización. El ella existe documentación de los diferentes gobiernos, desde el siglo
+             XVIII al XX, así como fondos y colecciones personales, Protocolos Notariales (siglos XVII-XX), Registro Mercantil y de Asociaciones, Juzgados
+             municipales y correccionales, Instituciones judiciales, Tribunales, Audiencia, centrales azucareros y otros.`,
+            image: 'assets/images/fondo_documental.jpg'
         }
     ]
     constructor(public layoutService: LayoutService, public router: Router, private informativeServiceService: InformativeServiceService) {

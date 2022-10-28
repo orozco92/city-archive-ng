@@ -1,9 +1,9 @@
-import { Component, Inject, Injector, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Injector, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { LazyLoadEvent } from 'primeng/api';
+import { Table } from 'primeng/table';
 import { MessageServiceSeverityEnum } from 'src/app/core/AppConstants';
 import { CrudComponentBase } from 'src/app/core/components/CrudComponentBase';
-import { ListComponentBase } from 'src/app/core/components/ListComponentBase';
 import { ServiceRequestStatusHelper } from 'src/app/core/helpers/ServiceRequestStatusHelper';
 import { IApiListQuery } from 'src/app/core/interfaces/IApiListResult';
 import { ProfileService } from 'src/app/core/services/profile.service';
@@ -16,6 +16,7 @@ import { ServiceRequestService } from 'src/app/core/services/service-requests.se
 export class MyServicesComponent extends CrudComponentBase {
 
     statusHelper = new ServiceRequestStatusHelper();
+    @ViewChild('dt') table!: Table;
 
     constructor(
         injector: Injector,
@@ -45,12 +46,11 @@ export class MyServicesComponent extends CrudComponentBase {
         this.serviceRequestService.delete(item.id)
             .subscribe(data => {
                 this.message.add({ summary: 'Servicio eliminado', severity: MessageServiceSeverityEnum.SUCCESS });
+                this.table.reset();
             })
     }
 
     editItem(item: any) {
         this.router.navigate(['main', 'service-request', item.id])
     }
-
-
 }

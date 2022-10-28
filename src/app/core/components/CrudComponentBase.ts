@@ -13,8 +13,6 @@ export abstract class CrudComponentBase extends ListComponentBase {
     }
 
     confirmDelete(item: any) {
-        console.log(123123);
-
         this.confirmationService.confirm({
             message: this.deleteMessage,
             header: this.deleteHeader,
