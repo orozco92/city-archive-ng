@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ControlContainer, NgForm } from '@angular/forms';
 import { ICommonProfileData } from 'src/app/core/models/common-profile-data';
 import { IUser } from 'src/app/core/models/user';
 import { ProfileService } from 'src/app/core/services/profile.service';
@@ -7,7 +8,8 @@ import { ProfileService } from 'src/app/core/services/profile.service';
     selector: 'app-profile-personal-data',
     templateUrl: './profile-personal-data.component.html',
     styles: [
-    ]
+    ],
+    viewProviders: [{ provide: ControlContainer, useExisting: NgForm }],
 })
 export class ProfilePersonalDataComponent implements OnInit {
 

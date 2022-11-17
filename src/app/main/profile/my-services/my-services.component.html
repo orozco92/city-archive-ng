@@ -7,7 +7,7 @@
             <h5 class="m-0">Mis solucitudes</h5>
             <span class="block mt-2 md:mt-0 p-input-icon-left">
                 <i class="pi pi-search"></i>
-                <input pInputText type="text" placeholder="Search..." class="w-full sm:w-auto" />
+                <input pInputText type="text" placeholder="Buscar..." class="w-full sm:w-auto" />
             </span>
         </div>
     </ng-template>
@@ -52,5 +52,10 @@
             </td>
         </tr>
     </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="5" class="text-center">No hay servicios solicitados</td>
+        </tr>
+    </ng-template>
 </p-table>
-<p-confirmDialog icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-confirmDialog icon="pi pi-exclamation-triangle" [acceptLabel]="'Si'"></p-confirmDialog>

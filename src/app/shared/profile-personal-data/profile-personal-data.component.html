@@ -1,26 +1,48 @@
 <div class="p-fluid p-formgrid grid">
     <div class="field col-12 md:col-6">
         <label htmlFor="name">Nombre</label>
-        <input pInputText id="name" name="name" [(ngModel)]="user.name" type="text" />
+        <input pInputText id="name" name="name" #name="ngModel" [(ngModel)]="user.name" type="text" required
+            [ngClass]="{'ng-invalid ng-dirty' : name.invalid && (name.dirty || name.touched)}" />
+        <small class="ng-dirty ng-invalid" *ngIf="name.invalid && (name.dirty || name.touched)">
+            El nombre es requerido.
+        </small>
     </div>
     <div class="field col-12 md:col-6">
         <label htmlFor="lastname">Apellidos</label>
-        <input pInputText id="lastname" [(ngModel)]="user.lastName" type="text" />
+        <input pInputText id="lastname" name="lastname" #lastname="ngModel" [(ngModel)]="user.lastName" type="text"
+            required [ngClass]="{'ng-invalid ng-dirty' : lastname.invalid && (lastname.dirty || lastname.touched)}" />
+        <small class="ng-dirty ng-invalid" *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)">
+            El apellido es requerido.
+        </small>
     </div>
     <div class="field col-12 md:col-6">
         <label htmlFor="ci">CI</label>
-        <input pInputText id="ci" [(ngModel)]="user.ci" type="text" />
+        <input pInputText id="ci" name="ci" #ci="ngModel" [(ngModel)]="user.ci" type="text" required minlength="11"
+            maxlength="11" [ngClass]="{'ng-invalid ng-dirty' : ci.invalid && (ci.dirty || ci.touched)}" />
+        <small class="ng-dirty ng-invalid" *ngIf="ci.invalid && (ci.dirty || ci.touched) && ci.errors?.['required']">
+            El CI es requerido.
+        </small>
+        <small class="ng-dirty ng-invalid"
+            *ngIf="ci.invalid && (ci.dirty || ci.touched) && (ci.errors?.['maxlength'] || ci.errors?.['minlength'])">
+            El CI debe tener 11 dígitos.
+        </small>
     </div>
     <div class="field col-12 md:col-6">
         <label htmlFor="email">Correo electrónico</label>
-        <input pInputText id="email" type="email" [(ngModel)]="user.email" />
+        <input pInputText id="email" name="email" #email="ngModel" type="email" [(ngModel)]="user.email" email
+            [ngClass]="{'ng-invalid ng-dirty' : email.invalid && (email.dirty || email.touched)}" />
+        <small class="ng-dirty ng-invalid" *ngIf="email.invalid && (email.dirty || email.touched)">
+            La dirección de correo no es válida.
+        </small>
     </div>
     <div class="field col-12">
         <label htmlFor="address">Dirección</label>
-        <textarea pInputTextarea id="address" rows="4" [(ngModel)]="user.address"></textarea>
+        <textarea pInputTextarea id="address" name="address" #address="ngModel" rows="4"
+            [(ngModel)]="user.address"></textarea>
     </div>
     <div class="field col-12 md:col-3">
         <label htmlFor="nationality">Nacionalidad</label>
-        <input pInputText id="nationality" type="text" [(ngModel)]="user.nationality" />
+        <input pInputText id="nationality" name="nationality" #nationality="ngModel" type="text"
+            [(ngModel)]="user.nationality" />
     </div>
 </div>

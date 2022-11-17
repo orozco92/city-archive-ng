@@ -5,8 +5,8 @@ import { NotarialProtocolServiceComponent } from './notarial-protocol-service/no
 import { StandardServiceComponent } from './standard-service/standard-service.component';
 
 const routes: Routes = [
-    { path: 'foreign-index', component: ForeignIndexServiceComponent },
-    { path: 'notarial-protocol', component: NotarialProtocolServiceComponent },
+    { path: 'foreign-index/:id', component: ForeignIndexServiceComponent },
+    { path: 'notarial-protocol/:id', component: NotarialProtocolServiceComponent },
     { path: ':id', component: StandardServiceComponent },
 ];
 

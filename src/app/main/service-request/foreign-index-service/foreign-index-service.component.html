@@ -1,14 +1,59 @@
-<!-- <div class="grid">
+<div class="grid">
     <div class="col-12">
         <div class="card">
-            <h5>Solicitar servicio de {{service.name}}</h5>
-            <app-profile-personal-data></app-profile-personal-data>
-            <div class="p-card-footer">
-                <button pButton class="mr-5" label="Solicitar" (click)="save()"></button>
-                <button pButton class="p-button-secondary mr-5" label="Importar datos desde mi perfil"
-                    (click)="importProfileData()"></button>
-                <button pButton class="p-button-secondary" label="Cancelar" (click)="back()"></button>
-            </div>
+            <form #form="ngForm">
+                <h5>Solicitar servicio de {{service.name}}</h5>
+                <div class="border-1 border-round-lg border-200 p-3 mb-3">
+                    <h6>Datos del solicitante</h6>
+                    <app-profile-personal-data></app-profile-personal-data>
+                </div>
+                <div class="border-1 border-round-lg border-200 p-3 mb-3">
+                    <h6>Datos de busqueda</h6>
+                    <div class="p-fluid p-formgrid grid">
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="name">Nombre</label>
+                            <input pInputText id="searchName" name="searchName" #searchName="ngModel"
+                                [(ngModel)]="serviceRequest.name" type="text" required
+                                [ngClass]="{'ng-invalid ng-dirty' : searchName.invalid && (searchName.dirty || searchName.touched)}" />
+                            <small class="ng-dirty ng-invalid"
+                                *ngIf="searchName.invalid && (searchName.dirty || searchName.touched)">
+                                El nombre es requerido.
+                            </small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="lastname">Apellidos</label>
+                            <input pInputText id="searchLastname" name="searchLastname" #searchLastName="ngModel"
+                                [(ngModel)]="serviceRequest.lastName" type="text" required
+                                [ngClass]="{'ng-invalid ng-dirty' : searchLastName.invalid && (searchLastName.dirty || searchLastName.touched)}" />
+                            <small class="ng-dirty ng-invalid"
+                                *ngIf="searchLastName.invalid && (searchLastName.dirty || searchLastName.touched)">
+                                El apellido es requerido.
+                            </small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="nationality">Nacionalidad</label>
+                            <input pInputText id="searchNationality" name="searchNationality" required
+                                #searchNationality="ngModel" type="text" [(ngModel)]="serviceRequest.nationality"
+                                [ngClass]="{'ng-invalid ng-dirty' : searchNationality.invalid && (searchNationality.dirty || searchNationality.touched)}" />
+                            <small class="ng-dirty ng-invalid"
+                                *ngIf="searchNationality.invalid && (searchNationality.dirty || searchNationality.touched)">
+                                La nacionalidad es requerida.
+                            </small>
+                        </div>
+                        <div class="field col-12">
+                            <label htmlFor="information">Información de interés</label>
+                            <textarea pInputTextarea id="information" name="information" rows="4"
+                                [(ngModel)]="serviceRequest.informationOfInterest"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-card-footer">
+                    <button pButton class="mr-5" label="Solicitar" (click)="save()" [disabled]="form.invalid"></button>
+                    <button pButton class="p-button-secondary mr-5" label="Importar datos desde mi perfil"
+                        (click)="importProfileData()"></button>
+                    <button pButton class="p-button-secondary" label="Cancelar" (click)="back()"></button>
+                </div>
+            </form>
         </div>
     </div>
-</div> -->
+</div>

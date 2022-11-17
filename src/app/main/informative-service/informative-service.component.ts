@@ -5,6 +5,7 @@ import { IApiListQuery } from 'src/app/core/interfaces/IApiListResult';
 import { debounce } from 'lodash-es';
 import { ListComponentBase } from 'src/app/core/components/ListComponentBase';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IInformativeService } from 'src/app/core/models/informative-service';
 
 @Component({
     selector: 'app-informative-service',
@@ -31,7 +32,13 @@ export class InformativeServiceComponent extends ListComponentBase {
         })
     }
 
-    requestService(id: number) {
-        this.router.navigate(['main', 'service-request', id])
+    requestService(service: IInformativeService) {
+        const r: any = ['main', 'service-request']
+        if (!!service.url && service.url != '/')
+            r.push(service.url.replace('/', ''));
+        r.push(service.id);
+        console.log(r);
+
+        this.router.navigate(r)
     }
 }
