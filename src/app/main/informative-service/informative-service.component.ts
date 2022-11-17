@@ -37,8 +37,6 @@ export class InformativeServiceComponent extends ListComponentBase {
         if (!!service.url && service.url != '/')
             r.push(service.url.replace('/', ''));
         r.push(service.id);
-        console.log(r);
-
         this.router.navigate(r)
     }
 }
