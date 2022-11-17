@@ -1,6 +1,6 @@
 import { HttpEvent, HttpHandler, HttpRequest, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import * as _ from "lodash";
+import { get } from "lodash-es";
 import { map, Observable } from "rxjs";
 import { AuthService } from "../services/auth.service";
 
@@ -29,7 +29,7 @@ export class JwtInterceptor {
         return next.handle(clone).pipe(
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
-                    if (_.get(event, 'body.msg') === 'TOKEN EXPIRATE') {
+                    if (get(event, 'body.msg') === 'TOKEN EXPIRATE') {
                         this.authService.logout();
                     }
                     return event;

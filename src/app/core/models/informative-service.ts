@@ -4,6 +4,7 @@ export interface IInformativeService {
     description: string;
     priceNative: number;
     priceForeign: number;
+    url: string;
     createdAt: Date;
     updatedAt: Date;
 }

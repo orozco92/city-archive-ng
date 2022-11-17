@@ -1,6 +1,8 @@
-<app-profile-personal-data [loadProfile]="true"></app-profile-personal-data>
-<div class="p-formgrid grid">
-    <div class="col-12 md:col-3">
-        <button pButton class="mr-5" label="Guardar" (click)="save()"></button>
+<form #form="ngForm">
+    <app-profile-personal-data [loadProfile]="true"></app-profile-personal-data>
+    <div class="p-formgrid grid">
+        <div class="col-12 md:col-3">
+            <button pButton class="mr-5" label="Guardar" (click)="save()" [disabled]="form.invalid"></button>
+        </div>
     </div>
-</div>
+</form>
