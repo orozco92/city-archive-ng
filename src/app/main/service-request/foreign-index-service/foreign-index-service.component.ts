@@ -9,6 +9,8 @@ import { IServiceRequestForeignIndex } from 'src/app/core/models/service-request
 import { ServiceRequestForeignIndexService } from 'src/app/core/services/service-request-foreign-index.service';
 import { MessageServiceSeverityEnum } from 'src/app/core/AppConstants';
 import { IServiceRequest } from 'src/app/core/models/service-request';
+import { switchMap, of } from 'rxjs';
+import { ServiceRequestService } from 'src/app/core/services/service-requests.service';
 // import { ServiceRequestService } from 'src/app/core/services/service-requests.service';
 
 @Component({
@@ -24,6 +26,7 @@ export class ForeignIndexServiceComponent extends AppComponentBase implements On
     constructor(
         injector: Injector,
         private informativeService: InformativeServiceService,
+        private serviceRequestService: ServiceRequestService,
         private foreignIndexService: ServiceRequestForeignIndexService,
         private route: ActivatedRoute,
         private location: Location,
@@ -32,10 +35,20 @@ export class ForeignIndexServiceComponent extends AppComponentBase implements On
     }
 
     ngOnInit(): void {
-        const serviceId = this.route.snapshot.paramMap.get('id') ?? 0;
+        const serviceId = this.route.snapshot.paramMap.get('serviceId') ?? 0;
+        const id = this.route.snapshot.paramMap.get('id') ?? 0;
         const sub = this.informativeService.get(serviceId)
-            .subscribe(data => {
+            .pipe(switchMap(data => {
                 this.service = data;
+                return !!id
+                    ? this.serviceRequestService.get(id)
+                    : of(false);
+            }))
+            .subscribe(data => {
+                if (data) {
+                    this.serviceRequest = (data as IServiceRequest).ServiceRequestForeignIndex;
+                    this.profileComponent.setUser(data as IServiceRequest)
+                }
             })
         this.subscriptions.push(sub)
     }

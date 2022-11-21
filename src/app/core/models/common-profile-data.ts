@@ -4,7 +4,7 @@ export interface ICommonProfileData {
     name: string;
     lastName: string;
     email: string;
-    phone: string;
+    phone?: string;
     address: string;
     nationality: string;
 }

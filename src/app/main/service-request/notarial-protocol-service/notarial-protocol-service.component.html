@@ -1,1 +1,73 @@
-<p>notarial-protocol-service works!</p>
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <form #form="ngForm">
+                <h5>Solicitar servicio de {{service.name}}</h5>
+                <div class="border-1 border-round-lg border-200 p-3 mb-3">
+                    <h6>Datos del solicitante</h6>
+                    <app-profile-personal-data></app-profile-personal-data>
+                </div>
+                <div class="border-1 border-round-lg border-200 p-3 mb-3">
+                    <h6>Datos de busqueda</h6>
+                    <div class="p-fluid p-formgrid grid">
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="searchTypes">Tipo de busqueda</label>
+                            <p-dropdown name="searchTypes" id="searchTypes" [options]="searchTypes"
+                                [(ngModel)]="serviceRequest.type"></p-dropdown>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="startDate">Fecha inicio</label>
+                            <p-calendar inputId="startDate" id="startDate" name="startDate" view="year" dateFormat="yy"
+                                [(ngModel)]="serviceRequest.startDate" [required]="true" #startDate="ngModel"
+                                [ngClass]="{'ng-invalid ng-dirty' : startDate.invalid && (startDate.dirty || startDate.touched)}">
+                            </p-calendar>
+                            <small class="ng-dirty ng-invalid"
+                                *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)">
+                                La fecha de inicio es requerida.
+                            </small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="endDate">Fecha fin</label>
+                            <p-calendar inputId="endDate" name="endDate" view="year" dateFormat="yy"
+                                [(ngModel)]="serviceRequest.endDate">
+                            </p-calendar>
+                        </div>
+                        <div class="field col-12">
+                            <label htmlFor="appearingOrInvolved">Nombre y apellidos de los
+                                implicados/comparecientes</label>
+                            <textarea pInputTextarea id="appearingOrInvolved" name="appearingOrInvolved"
+                                #appearingOrInvolved="ngModel" [(ngModel)]="serviceRequest.appearingOrInvolved"
+                                type="text" [required]="true"
+                                [ngClass]="{'ng-invalid ng-dirty' : appearingOrInvolved.invalid && (appearingOrInvolved.dirty || appearingOrInvolved.touched)}">
+                            </textarea>
+                            <small class="ng-dirty ng-invalid"
+                                *ngIf="appearingOrInvolved.invalid && (appearingOrInvolved.dirty || appearingOrInvolved.touched)">
+                                Los nombres son requeridos.
+                            </small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="notary">Notario</label>
+                            <input pInputText id="notary" name="notary" [(ngModel)]="serviceRequest.notary"
+                                type="text" />
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="city">Ciudad</label>
+                            <input pInputText id="city" name="city" required #city="ngModel" type="text"
+                                [(ngModel)]="serviceRequest.city"
+                                [ngClass]="{'ng-invalid ng-dirty' : city.invalid && (city.dirty || city.touched)}" />
+                            <small class="ng-dirty ng-invalid" *ngIf="city.invalid && (city.dirty || city.touched)">
+                                La ciudad es requerida.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-card-footer">
+                    <button pButton class="mr-5" label="Solicitar" (click)="save()" [disabled]="form.invalid"></button>
+                    <button pButton class="p-button-secondary mr-5" label="Importar datos desde mi perfil"
+                        (click)="importProfileData()"></button>
+                    <button pButton class="p-button-secondary" label="Cancelar" (click)="back()"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

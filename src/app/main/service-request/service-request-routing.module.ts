@@ -5,9 +5,12 @@ import { NotarialProtocolServiceComponent } from './notarial-protocol-service/no
 import { StandardServiceComponent } from './standard-service/standard-service.component';
 
 const routes: Routes = [
-    { path: 'foreign-index/:id', component: ForeignIndexServiceComponent },
-    { path: 'notarial-protocol/:id', component: NotarialProtocolServiceComponent },
-    { path: ':id', component: StandardServiceComponent },
+    { path: ':serviceId/foreign-index', component: ForeignIndexServiceComponent },
+    { path: ':serviceId/foreign-index/:id', component: ForeignIndexServiceComponent },
+    { path: ':serviceId/notarial-protocol', component: NotarialProtocolServiceComponent },
+    { path: ':serviceId/notarial-protocol/:id', component: NotarialProtocolServiceComponent },
+    { path: ':serviceId', component: StandardServiceComponent },
+    { path: ':serviceId/:id', component: StandardServiceComponent },
 ];
 
 @NgModule({

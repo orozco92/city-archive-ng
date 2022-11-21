@@ -28,6 +28,10 @@ export class ProfilePersonalDataComponent implements OnInit {
         return this.user as ICommonProfileData;
     }
 
+    setUser(user: ICommonProfileData): ICommonProfileData {
+        return this.user = user;
+    }
+
     loadFromProfile() {
         const user = this.profileService.getUser();
         if (user) {
