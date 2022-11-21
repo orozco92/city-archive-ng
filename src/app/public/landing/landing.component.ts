@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DestroyComponent } from 'src/app/core/components/DestroyComponent';
 import { IInformativeService } from 'src/app/core/models/informative-service';
-import { InformativeServiceService } from 'src/app/core/services/informative-service.service';
+import { PublicService } from 'src/app/core/services/public.service';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 @Component({
@@ -125,13 +125,13 @@ export class LandingComponent extends DestroyComponent implements OnInit {
             image: 'assets/images/fondo_documental.jpg'
         }
     ]
-    constructor(public layoutService: LayoutService, public router: Router, private informativeServiceService: InformativeServiceService) {
+    constructor(public layoutService: LayoutService, public router: Router, private publicService: PublicService) {
         super();
     }
     ngOnInit(): void {
-        const sub = this.informativeServiceService.list({ limit: 9, skip: 0 })
+        const sub = this.publicService.list('informative-services', { limit: 9, skip: 0 })
             .subscribe(data => {
-                this.services = data.rows;
+                this.services = data.rows as IInformativeService[];
             });
         this.subscriptions.push(sub);
     }
