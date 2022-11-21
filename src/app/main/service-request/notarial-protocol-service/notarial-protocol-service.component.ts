@@ -10,8 +10,8 @@ import { ServiceRequestNotarialProtocolService } from 'src/app/core/services/ser
 import { ProfilePersonalDataComponent } from 'src/app/shared/profile-personal-data/profile-personal-data.component';
 import { Location } from '@angular/common';
 import { switchMap, of } from 'rxjs';
-import { ICommonProfileData } from 'src/app/core/models/common-profile-data';
 import { ServiceRequestService } from 'src/app/core/services/service-requests.service';
+// import * as moment from 'moment';
 
 @Component({
     selector: 'app-notarial-protocol-service',
@@ -49,6 +49,8 @@ export class NotarialProtocolServiceComponent extends AppComponentBase implement
             .subscribe(data => {
                 if (data) {
                     this.serviceRequest = (data as IServiceRequest).ServiceRequestNotarialProtocol;
+                    this.serviceRequest.startDate = new Date(this.serviceRequest.startDate as unknown as string);
+                    this.serviceRequest.endDate = new Date(this.serviceRequest.endDate as unknown as string);
                     this.profileComponent.setUser(data as IServiceRequest)
                 }
             })

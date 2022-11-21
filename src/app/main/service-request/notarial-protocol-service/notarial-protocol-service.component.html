@@ -17,7 +17,7 @@
                         </div>
                         <div class="field col-12 md:col-4">
                             <label htmlFor="startDate">Fecha inicio</label>
-                            <p-calendar inputId="startDate" id="startDate" name="startDate"
+                            <p-calendar inputId="startDate" id="startDate" name="startDate" view="year" dateFormat="yy"
                                 [(ngModel)]="serviceRequest.startDate" [required]="true" #startDate="ngModel"
                                 [ngClass]="{'ng-invalid ng-dirty' : startDate.invalid && (startDate.dirty || startDate.touched)}">
                             </p-calendar>
@@ -28,7 +28,8 @@
                         </div>
                         <div class="field col-12 md:col-4">
                             <label htmlFor="endDate">Fecha fin</label>
-                            <p-calendar inputId="endDate" name="endDate" [(ngModel)]="serviceRequest.endDate">
+                            <p-calendar inputId="endDate" name="endDate" view="year" dateFormat="yy"
+                                [(ngModel)]="serviceRequest.endDate">
                             </p-calendar>
                         </div>
                         <div class="field col-12">
