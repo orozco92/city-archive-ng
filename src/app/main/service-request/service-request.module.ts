@@ -11,6 +11,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { ProfilePersonalDataModule } from 'src/app/shared/profile-personal-data/profile-personal-data.module';
+import { DropdownModule } from 'primeng/dropdown';
+import { CalendarModule } from 'primeng/calendar';
 
 
 @NgModule({
@@ -27,6 +29,8 @@ import { ProfilePersonalDataModule } from 'src/app/shared/profile-personal-data/
         InputTextModule,
         InputTextareaModule,
         ButtonModule,
+        CalendarModule,
+        DropdownModule,
         ProfilePersonalDataModule
     ]
 })

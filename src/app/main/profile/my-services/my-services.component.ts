@@ -51,6 +51,10 @@ export class MyServicesComponent extends CrudComponentBase {
     }
 
     editItem(item: any) {
-        this.router.navigate(['main', 'service-request', item.id])
+        const r = ['main', 'service-request', item.InformativeService.id];
+        if (!!item.InformativeService.url && item.InformativeService.url != '/')
+            r.push(item.InformativeService.url.replace('/', ''));
+        r.push(item.id);
+        this.router.navigate(r)
     }
 }
