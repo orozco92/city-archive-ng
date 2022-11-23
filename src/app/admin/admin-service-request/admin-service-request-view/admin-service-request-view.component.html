@@ -1,0 +1,152 @@
+<p-dialog [(visible)]="visible" [style]="{width: '50vw'}" header="Detalles de la solicitud" [modal]="true"
+    class="p-fluid">
+    <ng-template pTemplate="content">
+        <div>
+            <h4>{{serviceRequest!.date | date: 'yyyy-MM-dd'}} {{serviceRequest!.InformativeService.name}}</h4>
+            <h5>Datos del solicitante</h5>
+            <div class="p-fluid grid">
+                <div class="col-12 md:col-6">
+                    <div class="p-fluid grid">
+                        <div class="field col-4">
+                            <p class="text-base">Nombre y apellidos</p>
+                        </div>
+                        <div class="field col-8">
+                            <p class="text-base">{{serviceRequest!.name}} {{serviceRequest!.lastName}}</p>
+                        </div>
+                    </div>
+                    <div class="p-fluid grid">
+                        <div class="field col-4">
+                            <p class="text-base">Correo electrónico</p>
+                        </div>
+                        <div class="field col-8">
+                            <p class="text-base">{{serviceRequest!.email}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <div class="p-fluid grid">
+                        <p class="text-base">Dirección</p>
+                        <div class="col-12">
+                            <p class="text-base">
+                                {{serviceRequest!.address}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-fluid grid">
+                        <div class="field col-4">
+                            <p class="text-base">Nacionalidad</p>
+                        </div>
+                        <div class="field col-8">
+                            <p class="text-base">{{serviceRequest!.nationality}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="serviceRequest!.ServiceRequestForeignIndex">
+            <h5>Indice Extranjero</h5>
+            <div class="p-fluid grid">
+                <div class="col-12 md:col-6">
+                    <div class="p-fluid grid">
+                        <div class="field col-4">
+                            <p class="text-base">Nombre y apellidos</p>
+                        </div>
+                        <div class="field col-8">
+                            <p class="text-base">{{serviceRequest!.ServiceRequestForeignIndex!.name}}
+                                {{serviceRequest!.ServiceRequestForeignIndex!.lastName}}</p>
+                        </div>
+                    </div>
+                    <div class="p-fluid grid">
+                        <div class="field col-4">
+                            <p class="text-base">Nacionalidad</p>
+                        </div>
+                        <div class="field col-8">
+                            <p class="text-base">{{serviceRequest!.ServiceRequestForeignIndex!.nationality}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <div class="p-fluid grid">
+                        <p class="text-base">Datos de interes</p>
+                        <div class="col-12">
+                            <p class="text-base">
+                                {{serviceRequest!.ServiceRequestForeignIndex!.informationOfInterest}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="serviceRequest!.ServiceRequestNotarialProtocol">
+            <h5>Protocolo notarial - {{serviceRequest!.ServiceRequestNotarialProtocol!.type}}</h5>
+            <div class="p-fluid grid">
+                <div class="col-12 md:col-6">
+                    <div class="p-fluid grid">
+                        <div class="field col-4">
+                            <p class="text-base">Involucrados</p>
+                        </div>
+                        <div class="field col-8">
+                            <p class="text-base">
+                                {{serviceRequest!.ServiceRequestNotarialProtocol!.appearingOrInvolved}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-fluid grid">
+                        <div class="field col-4">
+                            <p class="text-base">Notario</p>
+                        </div>
+                        <div class="field col-8">
+                            <p class="text-base"
+                                *ngIf="serviceRequest!.ServiceRequestNotarialProtocol!.notary; else emptyData">
+                                {{serviceRequest!.ServiceRequestNotarialProtocol!.notary }}
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <div class="p-fluid grid">
+                        <div class="field col-4">
+                            <p class="text-base">Desde</p>
+                        </div>
+                        <div class="field col-8">
+                            <p class="text-base">
+                                {{serviceRequest!.ServiceRequestNotarialProtocol!.startDate | date : 'yyyy'}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-fluid grid">
+                        <div class="field col-4">
+                            <p class="text-base">Hasta</p>
+                        </div>
+                        <div class="field col-8">
+                            <p class="text-base"
+                                *ngIf="serviceRequest!.ServiceRequestNotarialProtocol!.endDate; else emptyData">
+                                {{serviceRequest!.ServiceRequestNotarialProtocol!.endDate | date : 'yyyy'}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-fluid grid">
+                        <div class="field col-4">
+                            <p class="text-base">Ciudad</p>
+                        </div>
+                        <div class="field col-8">
+                            <p class="text-base">
+                                {{serviceRequest!.ServiceRequestNotarialProtocol!.city }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cerrar" (click)="visible = false" icon="pi pi-times"
+            class="p-button-text"></button>
+    </ng-template>
+</p-dialog>
+<ng-template #emptyData>
+    <p> - </p>
+</ng-template>

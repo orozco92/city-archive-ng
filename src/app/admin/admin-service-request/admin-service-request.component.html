@@ -1,0 +1,96 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-6 py-6">
+            <p-table #dt [value]="dataListHelper.rows" responsiveLayout="scroll" [paginator]="true"
+                [rowsPerPageOptions]="dataListHelper.predefinedRowsCountPerPage"
+                [rows]="dataListHelper.defaultRowsCountPerPage" [totalRecords]="dataListHelper.totalRowsCount"
+                [rowHover]="true" dataKey="id" [lazy]="true" (onLazyLoad)="loadData($event)"
+                [loading]="dataListHelper.loading" stateStorage="session" stateKey="admin-service-request-session">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h5 class="m-0">Administrar solicitudes</h5>
+                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" placeholder="Buscar" [(ngModel)]="dataListHelper.searchText"
+                                class="w-full sm:w-auto" (change)="loadData()" />
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="date">Fecha de solicitud <p-sortIcon field="date"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="ServiceRequest.name">Servicio <p-sortIcon field="ServiceRequest.name">
+                            </p-sortIcon>
+                        </th>
+                        <th>Nombre </th>
+                        <th>CI</th>
+                        <th pSortableColumn="status">Estado <p-sortIcon field="status"></p-sortIcon>
+                        </th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-item>
+                    <tr>
+                        <td style="width:14%; min-width:10rem;"><span class="p-column-title">Fecha de solicitud</span>
+                            {{item.date | date : 'yyyy-MM-dd'}}
+                        </td>
+                        <td>
+                            <span class="p-column-title">Servicio</span>
+                            {{item.InformativeService?.name}}
+                        </td>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">Nombre</span>
+                            {{item.name}} {{item.lastName}}
+                        </td>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">CI</span>
+                            {{item.ci}}
+                        </td>
+                        <td style="width:14%; min-width: 10rem;"><span class="p-column-title">Status</span>
+                            <span class="p-badge text-base pl-3 pr-3"
+                                [ngClass]="statusHelper.getStatusLabelStyle(item.status)">
+                                {{statusHelper.getStatusTranslation(item.status)}}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="flex">
+                                <button pButton pRipple icon="pi pi-pencil"
+                                    class="p-button-rounded p-button-success mr-2"
+                                    (click)="changeStatus(item)"></button>
+                                <button pButton pRipple icon="pi pi-file" class="p-button-rounded p-button-primary"
+                                    (click)="viewDetails(item)"></button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="5" class="text-center">No hay solicitudes creadas</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <p-dialog [(visible)]="showDialog" header="Cambiar estado" [modal]="true" [style]="{width:'50vw'}"
+            class="p-fluid">
+            <ng-template pTemplate="content">
+                <h1 class="text-xl">{{selectedRequest.date | date: 'yyyy-MM-dd'}}
+                    {{selectedRequest.InformativeService?.name}}</h1>
+                <div class="field">
+                    <label for="status">Estado</label>
+                    <p-dropdown name="status" id="status" [options]="statusList" optionLabel="value" optionValue="key"
+                        appendTo="body" [(ngModel)]="selectedRequest.status">
+                    </p-dropdown>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Actualizar"
+                    (click)="updateStatus()"></button>
+                <button pButton pRipple icon="pi pi-times" class="p-button-text" label="Cancelar"
+                    (click)="showDialog = false"></button>
+            </ng-template>
+        </p-dialog>
+    </div>
+</div>
+<app-admin-service-request-view></app-admin-service-request-view>

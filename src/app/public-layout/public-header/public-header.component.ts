@@ -30,10 +30,10 @@ export class PublicHeaderComponent implements OnInit {
             url: '/about-us',
             label: 'Sobre nosotros',
         },
-        // {
-        //     url: '/admin',
-        //     label: 'Administración',
-        // },
+        {
+            url: '/admin',
+            label: 'Administración',
+        },
         // {
         //     url: '/testing',
         //     label: 'Testing',
