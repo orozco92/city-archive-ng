@@ -46,7 +46,7 @@ export class ForeignIndexServiceComponent extends AppComponentBase implements On
             }))
             .subscribe(data => {
                 if (data) {
-                    this.serviceRequest = (data as IServiceRequest).ServiceRequestForeignIndex;
+                    this.serviceRequest = (data as IServiceRequest).ServiceRequestForeignIndex as IServiceRequestForeignIndex;
                     this.profileComponent.setUser(data as IServiceRequest)
                 }
             })

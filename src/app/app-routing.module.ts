@@ -10,6 +10,12 @@ import { PublicLayoutComponent } from './public-layout/public-layout.component';
             {
                 path: 'admin', component: AppLayoutComponent,
                 children: [
+                    { path: '', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+                ],
+            },
+            {
+                path: 'admin1', component: AppLayoutComponent,
+                children: [
                     { path: '', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
                     { path: 'uikit', loadChildren: () => import('./demo/components/uikit/uikit.module').then(m => m.UikitModule) },
                     { path: 'utilities', loadChildren: () => import('./demo/components/utilities/utilities.module').then(m => m.UtilitiesModule) },

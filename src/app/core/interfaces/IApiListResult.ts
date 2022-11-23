@@ -11,4 +11,5 @@ export interface IApiListQuery {
     skip?: number;
     limit?: number;
     noPaged?: boolean;
+    order?: string;
 }

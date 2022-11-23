@@ -48,7 +48,7 @@ export class NotarialProtocolServiceComponent extends AppComponentBase implement
             }))
             .subscribe(data => {
                 if (data) {
-                    this.serviceRequest = (data as IServiceRequest).ServiceRequestNotarialProtocol;
+                    this.serviceRequest = (data as IServiceRequest).ServiceRequestNotarialProtocol as IServiceRequestNotarialProtocol;
                     this.serviceRequest.startDate = new Date(this.serviceRequest.startDate as unknown as string);
                     this.serviceRequest.endDate = new Date(this.serviceRequest.endDate as unknown as string);
                     this.profileComponent.setUser(data as IServiceRequest)
