@@ -1,4 +1,5 @@
 import { Component, Injector, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { LazyLoadEvent } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { CrudComponentBase } from 'src/app/core/components/CrudComponentBase';
@@ -13,9 +14,8 @@ import { AdminPublicFundsUpsertComponent } from './admin-public-funds-upsert/adm
 export class AdminPublicFundsComponent extends CrudComponentBase {
 
     @ViewChild(Table) table!: Table;
-    @ViewChild(AdminPublicFundsUpsertComponent) upsertComponent!: AdminPublicFundsUpsertComponent;
 
-    constructor(injector: Injector) {
+    constructor(injector: Injector, private router: Router) {
         super(injector);
     }
 
@@ -50,7 +50,8 @@ export class AdminPublicFundsComponent extends CrudComponentBase {
     };
 
     editItem(item?: any): void {
-        this.upsertComponent.openDialog();
+        const id = item ? item.id : 'add';
+        this.router.navigate(['admin', 'public-funds', id])
     };
 
 }
