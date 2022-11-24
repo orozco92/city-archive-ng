@@ -1,22 +1,15 @@
-import { KeyValue } from '@angular/common';
-import { Component, Injector, OnInit, ViewChild } from '@angular/core';
-import { pick } from 'lodash-es';
+import { Component, Injector, ViewChild } from '@angular/core';
 import { LazyLoadEvent } from 'primeng/api';
 import { Table } from 'primeng/table';
-import { MessageServiceSeverityEnum } from 'src/app/core/AppConstants';
 import { ListComponentBase } from 'src/app/core/components/ListComponentBase';
-import { ServiceRequestStatusEnum, ServiceRequestStatusHelper } from 'src/app/core/helpers/ServiceRequestStatusHelper';
 import { IApiListQuery } from 'src/app/core/interfaces/IApiListResult';
 import { IInformativeService } from 'src/app/core/models/informative-service';
-import { IServiceRequest } from 'src/app/core/models/service-request';
 import { InformativeServiceService } from 'src/app/core/services/informative-service.service';
-import { ServiceRequestService } from 'src/app/core/services/service-requests.service';
 import { AdminInformativeServiceEditComponent } from './admin-informative-service-edit/admin-informative-service-edit.component';
 
 @Component({
     selector: 'app-admin-informative-service',
-    templateUrl: './admin-informative-service.component.html',
-    styleUrls: ['./admin-informative-service.component.scss']
+    templateUrl: './admin-informative-service.component.html'
 })
 export class AdminInformativeServiceComponent extends ListComponentBase {
 

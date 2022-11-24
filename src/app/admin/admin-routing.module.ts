@@ -10,7 +10,8 @@ const routes: Routes = [
         path: 'informative-services',
         loadChildren: () => import('./admin-informative-service/admin-informative-service.module').then(m => m.AdminInformativeServiceModule)
     },
-    { path: '', pathMatch: 'full', redirectTo: 'service-request' }
+    { path: '', pathMatch: 'full', redirectTo: 'service-request' },
+    { path: 'public-funds', loadChildren: () => import('./admin-public-funds/admin-public-funds.module').then(m => m.AdminPublicFundsModule) }
 ];
 
 @NgModule({

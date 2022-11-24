@@ -13,8 +13,7 @@ import { AdminServiceRequestViewComponent } from './admin-service-request-view/a
 
 @Component({
     selector: 'app-admin-service-request',
-    templateUrl: './admin-service-request.component.html',
-    styleUrls: ['./admin-service-request.component.scss']
+    templateUrl: './admin-service-request.component.html'
 })
 export class AdminServiceRequestComponent extends ListComponentBase implements OnInit {
 
