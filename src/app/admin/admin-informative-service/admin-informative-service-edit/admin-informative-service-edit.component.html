@@ -1,0 +1,31 @@
+<p-dialog [(visible)]="visible" [style]="{width: '50vw'}" header="Editar servicio" [modal]="true" class="p-fluid">
+    <ng-template pTemplate="content">
+        <h4>{{informativeService.name}}</h4>
+        <div class="field">
+            <label for="description">Descripción</label>
+            <textarea id="description" pInputTextarea [(ngModel)]="informativeService.description" required rows="10"
+                cols="20">
+            </textarea>
+        </div>
+        <div class="formgrid grid">
+            <div class="field col">
+                <label for="price">Precio</label>
+                <p-inputNumber id="price" [(ngModel)]="informativeService.price" mode="currency" currency="USD"
+                    locale="en-US" [disabled]="true"></p-inputNumber>
+            </div>
+            <div class="field col">
+                <p-checkbox label="Habilitado" [(ngModel)]="informativeService.enabled" [binary]="true"></p-checkbox>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Actualizar" (click)="updateService()" icon="pi pi-check"
+            class="p-button-text"></button>
+        <button pButton pRipple label="Cerrar" (click)="visible = false" icon="pi pi-times"
+            class="p-button-text"></button>
+    </ng-template>
+</p-dialog>
+<ng-template #emptyData>
+    <p> - </p>
+</ng-template>
