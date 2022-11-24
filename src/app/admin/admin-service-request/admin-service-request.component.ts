@@ -25,7 +25,7 @@ export class AdminServiceRequestComponent extends ListComponentBase implements O
     @ViewChild(Table) table!: Table;
     @ViewChild(AdminServiceRequestViewComponent) viewDialog!: AdminServiceRequestViewComponent;
 
-    constructor(injector: Injector, private serviseRequestService: ServiceRequestService) {
+    constructor(injector: Injector, private serviceRequestService: ServiceRequestService) {
         super(injector);
         this.statusHelper = new ServiceRequestStatusHelper();
         Object.values(ServiceRequestStatusEnum).forEach(item => {
@@ -51,7 +51,7 @@ export class AdminServiceRequestComponent extends ListComponentBase implements O
         if (this.dataListHelper.searchText) {
             q.search = this.dataListHelper.searchText;
         }
-        this.serviseRequestService.list(q)
+        this.serviceRequestService.list(q)
             .subscribe(data => {
                 this.dataListHelper.rows = data.rows;
                 this.dataListHelper.totalRowsCount = data.count
@@ -70,7 +70,7 @@ export class AdminServiceRequestComponent extends ListComponentBase implements O
     }
 
     updateStatus() {
-        this.showDialog = false; this.serviseRequestService.update(this.selectedRequest.id ?? 0, this.selectedRequest as IServiceRequest)
+        this.showDialog = false; this.serviceRequestService.update(this.selectedRequest.id ?? 0, this.selectedRequest as IServiceRequest)
             .subscribe({
                 next: () => {
                     this.message.add({ summary: 'Estado actualizado', severity: MessageServiceSeverityEnum.SUCCESS });
