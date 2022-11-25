@@ -20,7 +20,7 @@ export abstract class CrudComponentBase extends ListComponentBase {
         });
     }
 
-    abstract deleteItem(item: any): void;
+    abstract deleteItem(item: unknown): void;
 
-    abstract editItem(item: any): void;
+    abstract editItem(item: unknown): void;
 }

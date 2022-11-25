@@ -6,5 +6,9 @@ import { LayoutService } from "./service/app.layout.service";
     templateUrl: './app.footer.component.html'
 })
 export class AppFooterComponent {
-    constructor(public layoutService: LayoutService) { }
+    logoUrl;
+
+    constructor(public layoutService: LayoutService) {
+        this.logoUrl = 'assets/images/logo.png';
+    }
 }
