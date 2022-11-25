@@ -5,20 +5,20 @@
             <div class="p-fluid formgrid grid">
                 <div class="field col">
                     <label for="catalogue">Catálogo</label>
-                    <input type="text" pInputText id="catalogue" name="catalogue" [(ngModel)]="publicFund.name" required
-                        autofocus />
+                    <input type="text" pInputText id="catalogue" name="catalogue" [(ngModel)]="publicFund.catalogue"
+                        required autofocus />
                 </div>
             </div>
 
             <div class="p-fluid formgrid grid">
                 <div class="field col">
-                    <label for="designation">Denominación</label>
-                    <input type="text" pInputText id="designation" name="designation"
-                        [(ngModel)]="publicFund.designation" required />
+                    <label for="denomination">Denominación</label>
+                    <input type="text" pInputText id="denomination" name="denomination"
+                        [(ngModel)]="publicFund.denomination" required />
                 </div>
                 <div class="field col">
-                    <label for="endDate">Fecha extrema</label>
-                    <p-calendar inputId="endDate" [(ngModel)]="publicFund.endDate" [required]="true"></p-calendar>
+                    <label for="date">Fecha extrema</label>
+                    <p-calendar inputId="date" [(ngModel)]="publicFund.date" [required]="true"></p-calendar>
                 </div>
             </div>
             <div class="p-fluid formgrid grid">
@@ -28,17 +28,29 @@
                         cols="20"></textarea>
                 </div>
             </div>
-
-            <div class="field">
-                <p-fileUpload name="demo[]" [customUpload]="true" [multiple]="true" mode="advanced"
-                    [showUploadButton]="false" [showCancelButton]="false" chooseLabel="Agregar"
-                    (onSelect)="addFile($event)" [files]="files">
+            <div class="field" *ngIf="publicFund.id">
+                <p-fileUpload name="files[]" [customUpload]="true" [multiple]="true" mode="advanced"
+                    chooseLabel="Agregar" uploadLabel="Subir archivos" cancelLabel="Cancelar"
+                    (uploadHandler)="uploadFiles($event.files)" [files]="files">
                     <ng-template pTemplate="content">
                         <ul *ngIf="publicFund.files?.length">
                             <li *ngFor="let file of publicFund.files">{{file.name}} - {{file.size}} bytes</li>
                         </ul>
                     </ng-template>
                 </p-fileUpload>
+            </div>
+            <div class="field" *ngIf="publicFund.id && publicFund.Archives.length">
+                <p-panel>
+                    <ng-template pTemplate="header">
+                        Archivos del fondo
+                    </ng-template>
+                    <div class="grid" *ngFor="let item of publicFund.Archives">
+                        <div class="col-6">{{item.fileName}}</div>
+                        <div class="col-6 text-right">
+                            <button pButton pRipple icon="pi pi-times" (click)="deleteFile(item)"></button>
+                        </div>
+                    </div>
+                </p-panel>
             </div>
             <div class="p-card-footer">
                 <button pButton pRipple label="Guardar" icon="pi pi-check" class="mr-5"

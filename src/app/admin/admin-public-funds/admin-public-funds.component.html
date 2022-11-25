@@ -44,11 +44,11 @@
                         </td>
                         <td style="width:14%; min-width:10rem;">
                             <span class="p-column-title">Denominación</span>
-                            {{item.designation}}
+                            {{item.denomination}}
                         </td>
                         <td style="width:14%; min-width:10rem;">
                             <span class="p-column-title">Fecha extrema</span>
-                            {{item.endDate | date : 'yyyy-MM-dd'}}
+                            {{item.date | date : 'yyyy-MM-dd'}}
                         </td>
                         <td>
                             <div class="flex">
@@ -70,3 +70,4 @@
         </div>
     </div>
 </div>
+<p-confirmDialog icon="pi pi-exclamation-triangle" [acceptLabel]="'Si'"></p-confirmDialog>

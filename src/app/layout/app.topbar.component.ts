@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { AppConstants } from '../core/AppConstants';
 import { LayoutService } from "./service/app.layout.service";
 
 @Component({
@@ -7,7 +8,8 @@ import { LayoutService } from "./service/app.layout.service";
     templateUrl: './app.topbar.component.html'
 })
 export class AppTopBarComponent {
-
+    logoUrl;
+    companyName = AppConstants.companyNameShort;
     items!: MenuItem[];
 
     @ViewChild('menubutton') menuButton!: ElementRef;
@@ -16,5 +18,7 @@ export class AppTopBarComponent {
 
     @ViewChild('topbarmenu') menu!: ElementRef;
 
-    constructor(public layoutService: LayoutService) { }
+    constructor(public layoutService: LayoutService) {
+        this.logoUrl = 'assets/images/logo.png';
+    }
 }

@@ -13,6 +13,8 @@ import { DialogModule } from 'primeng/dialog';
 import { FileUploadModule } from 'primeng/fileupload';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CalendarModule } from 'primeng/calendar';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { PanelModule } from 'primeng/panel';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { CalendarModule } from 'primeng/calendar';
         DialogModule,
         InputTextareaModule,
         CalendarModule,
-        FileUploadModule
+        FileUploadModule,
+        ConfirmDialogModule,
+        PanelModule
     ]
 })
 export class AdminPublicFundsModule { }
