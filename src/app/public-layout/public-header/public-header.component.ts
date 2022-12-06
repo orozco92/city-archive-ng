@@ -11,7 +11,7 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
     selector: 'app-public-header',
     templateUrl: './public-header.component.html',
     styleUrls: ['./public-header.component.scss'],
-    providers: [ProfileService, AuthService]
+    providers: [ProfileService, AuthService],
 })
 export class PublicHeaderComponent implements OnInit {
     logoUrl = '';
@@ -20,7 +20,11 @@ export class PublicHeaderComponent implements OnInit {
         {
             url: '/',
             label: 'Inicio',
-            fragment: 'home'
+            fragment: 'home',
+        },
+        {
+            label: 'Fondos públicos',
+            url: '/public-funds',
         },
         {
             url: '/main/services',
@@ -38,43 +42,49 @@ export class PublicHeaderComponent implements OnInit {
         //     url: '/testing',
         //     label: 'Testing',
         // }
-    ]
-    user: IUser | undefined = undefined
+    ];
+    user: IUser | undefined = undefined;
     userMenuItems!: MenuItem[];
     constructor(
         public layoutService: LayoutService,
         public router: Router,
         private profileService: ProfileService,
-        authService: AuthService) {
+        authService: AuthService
+    ) {
         // this.logoUrl = `assets/layout/images/${layoutService.config.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}.svg`;
         this.logoUrl = 'assets/images/logo.png';
         this.userMenuItems = [
             {
-                label: 'Mi perfil', icon: 'pi pi-fw pi-user', routerLink: '/main/profile',
+                label: 'Mi perfil',
+                icon: 'pi pi-fw pi-user',
+                routerLink: '/main/profile',
                 queryParams: {
-                    tab: 'personal-data'
-                }
+                    tab: 'personal-data',
+                },
             },
             {
-                label: 'Solicitudes', icon: 'pi pi-fw pi-shopping-cart', routerLink: '/main/profile',
+                label: 'Solicitudes',
+                icon: 'pi pi-fw pi-shopping-cart',
+                routerLink: '/main/profile',
                 queryParams: {
-                    tab: 'my-services'
-                }
+                    tab: 'my-services',
+                },
             },
             { separator: true },
             {
-                label: 'Salir', icon: 'pi pi-fw pi-sign-out',
+                label: 'Salir',
+                icon: 'pi pi-fw pi-sign-out',
                 command: () => {
                     authService.logout();
-                }
+                },
             },
         ];
         this.user = profileService.getUser();
     }
 
     ngOnInit(): void {
-        this.profileService.profile.subscribe(data => {
-            this.user = data
-        })
+        this.profileService.profile.subscribe((data) => {
+            this.user = data;
+        });
     }
 }
