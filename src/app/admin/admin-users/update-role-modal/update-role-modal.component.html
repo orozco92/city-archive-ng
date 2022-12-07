@@ -1,0 +1,42 @@
+<p-dialog
+    [(visible)]="visible"
+    header="Cambiar rol"
+    [modal]="modal"
+    [style]="{ width: '50vw' }"
+    class="p-fluid"
+>
+    <ng-template pTemplate="content">
+        <h1 class="text-xl">{{ data.name }} {{ data.lastName }}</h1>
+        <div class="field">
+            <label for="role">Rol</label>
+            <p-dropdown
+                name="role"
+                id="role"
+                [options]="roleList"
+                optionLabel="value"
+                optionValue="key"
+                appendTo="body"
+                [(ngModel)]="selectedRole"
+            >
+            </p-dropdown>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button
+            pButton
+            pRipple
+            icon="pi pi-check"
+            class="p-button-text"
+            label="Actualizar"
+            (click)="updateRole()"
+        ></button>
+        <button
+            pButton
+            pRipple
+            icon="pi pi-times"
+            class="p-button-text"
+            label="Cancelar"
+            (click)="visible = false"
+        ></button>
+    </ng-template>
+</p-dialog>

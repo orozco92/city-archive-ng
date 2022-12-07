@@ -5,7 +5,10 @@ import { LazyLoadEvent } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { MessageServiceSeverityEnum } from 'src/app/core/AppConstants';
 import { ListComponentBase } from 'src/app/core/components/ListComponentBase';
-import { ServiceRequestStatusEnum, ServiceRequestStatusHelper } from 'src/app/core/helpers/ServiceRequestStatusHelper';
+import {
+    ServiceRequestStatusEnum,
+    ServiceRequestStatusHelper,
+} from 'src/app/core/helpers/ServiceRequestStatusHelper';
 import { IApiListQuery } from 'src/app/core/interfaces/IApiListResult';
 import { IServiceRequest } from 'src/app/core/models/service-request';
 import { ServiceRequestService } from 'src/app/core/services/service-requests.service';
@@ -13,49 +16,54 @@ import { AdminServiceRequestViewComponent } from './admin-service-request-view/a
 
 @Component({
     selector: 'app-admin-service-request',
-    templateUrl: './admin-service-request.component.html'
+    templateUrl: './admin-service-request.component.html',
 })
-export class AdminServiceRequestComponent extends ListComponentBase implements OnInit {
-
+export class AdminServiceRequestComponent extends ListComponentBase {
     statusHelper: ServiceRequestStatusHelper;
     selectedRequest: Partial<IServiceRequest> = {};
     showDialog = false;
     statusList: KeyValue<string, string>[] = [];
     @ViewChild(Table) table!: Table;
-    @ViewChild(AdminServiceRequestViewComponent) viewDialog!: AdminServiceRequestViewComponent;
+    @ViewChild(AdminServiceRequestViewComponent)
+    viewDialog!: AdminServiceRequestViewComponent;
 
-    constructor(injector: Injector, private serviceRequestService: ServiceRequestService) {
+    constructor(
+        injector: Injector,
+        private serviceRequestService: ServiceRequestService
+    ) {
         super(injector);
         this.statusHelper = new ServiceRequestStatusHelper();
-        Object.values(ServiceRequestStatusEnum).forEach(item => {
-            this.statusList.push({ key: item, value: this.statusHelper.getStatusTranslation(item) });
+        Object.values(ServiceRequestStatusEnum).forEach((item) => {
+            this.statusList.push({
+                key: item,
+                value: this.statusHelper.getStatusTranslation(item),
+            });
         });
-    }
-
-    ngOnInit(): void {
     }
 
     loadData(event?: LazyLoadEvent) {
         this.dataListHelper.loading = true;
         let order = 'date:asc';
         if (event?.sortField) {
-            order = event?.sortField + ':' + (event?.sortOrder == -1 ? 'ASC' : 'DESC');
+            order =
+                event?.sortField +
+                ':' +
+                (event?.sortOrder == -1 ? 'ASC' : 'DESC');
         }
 
         const q: IApiListQuery = {
             skip: event?.first ?? 0,
             limit: event?.rows ?? this.dataListHelper.defaultRowsCountPerPage,
-            order
-        }
+            order,
+        };
         if (this.dataListHelper.searchText) {
             q.search = this.dataListHelper.searchText;
         }
-        this.serviceRequestService.list(q)
-            .subscribe(data => {
-                this.dataListHelper.rows = data.rows;
-                this.dataListHelper.totalRowsCount = data.count
-                this.dataListHelper.loading = false;
-            })
+        this.serviceRequestService.list(q).subscribe((data) => {
+            this.dataListHelper.rows = data.rows;
+            this.dataListHelper.totalRowsCount = data.count;
+            this.dataListHelper.loading = false;
+        });
     }
 
     viewDetails(request: IServiceRequest) {
@@ -69,17 +77,27 @@ export class AdminServiceRequestComponent extends ListComponentBase implements O
     }
 
     updateStatus() {
-        this.showDialog = false; this.serviceRequestService.update(this.selectedRequest.id ?? 0, this.selectedRequest as IServiceRequest)
+        this.showDialog = false;
+        this.serviceRequestService
+            .update(
+                this.selectedRequest.id ?? 0,
+                this.selectedRequest as IServiceRequest
+            )
             .subscribe({
                 next: () => {
-                    this.message.add({ summary: 'Estado actualizado', severity: MessageServiceSeverityEnum.SUCCESS });
+                    this.message.add({
+                        summary: 'Estado actualizado',
+                        severity: MessageServiceSeverityEnum.SUCCESS,
+                    });
                     this.table.reset();
                 },
                 error: () => {
-                    this.message.add({ summary: 'Ocurrio un error al actualizar el estado', severity: MessageServiceSeverityEnum.ERROR });
+                    this.message.add({
+                        summary: 'Ocurrio un error al actualizar el estado',
+                        severity: MessageServiceSeverityEnum.ERROR,
+                    });
                     this.table.reset();
-                }
-            })
+                },
+            });
     }
-
 }
