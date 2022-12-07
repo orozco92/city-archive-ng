@@ -9,7 +9,7 @@ import { StyleClassModule } from 'primeng/styleclass';
 import { ChartModule } from 'primeng/chart';
 import { PanelModule } from 'primeng/panel';
 import { ButtonModule } from 'primeng/button';
-
+import { MenuModule } from 'primeng/menu';
 
 @NgModule({
     declarations: [LandingComponent, AboutUsComponent],
@@ -20,7 +20,7 @@ import { ButtonModule } from 'primeng/button';
         StyleClassModule,
         ChartModule,
         PanelModule,
-        ButtonModule
-    ]
+        ButtonModule,
+    ],
 })
-export class PublicModule { }
+export class PublicModule {}
