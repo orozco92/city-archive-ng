@@ -1,13 +1,14 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { MessageServiceSeverityEnum } from 'src/app/core/AppConstants';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
+    selector: 'app-register',
+    templateUrl: './register.component.html',
     styles: [
         `
             :host ::ng-deep .p-password input {
@@ -29,10 +30,12 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
         `,
     ],
 })
-export class LoginComponent {
+export class RegisterComponent {
     valCheck: string[] = ['remember'];
     password!: string;
     email!: string;
+    repeatPassword!: string;
+    username!: string;
     redirectUrl: string;
     logoUrl = '';
 
@@ -40,25 +43,29 @@ export class LoginComponent {
         public layoutService: LayoutService,
         private authService: AuthService,
         private messageService: MessageService,
-        route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private location: Location
     ) {
-        this.redirectUrl =
-            route.snapshot.queryParamMap.get('redirectTo') ?? '/';
+        this.redirectUrl = '/auth/login';
         this.logoUrl = 'assets/images/logo.png';
     }
 
-    login() {
-        this.authService.login(this.email, this.password).subscribe({
-            next: (data) => {
-                this.router.navigate([this.redirectUrl]);
-            },
-            error: (error) => {
-                this.messageService.add({
-                    summary: 'Invalid email or password',
-                    severity: MessageServiceSeverityEnum.ERROR,
-                });
-            },
-        });
+    register() {
+        this.authService
+            .register(this.username, this.password, this.email)
+            .subscribe({
+                next: (data) => {
+                    this.router.navigate([this.redirectUrl]);
+                },
+                error: (error) => {
+                    this.messageService.add({
+                        summary: 'El usuario ya existe',
+                        severity: MessageServiceSeverityEnum.ERROR,
+                    });
+                },
+            });
+    }
+    cacncel() {
+        this.location.back();
     }
 }
