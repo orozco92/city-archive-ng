@@ -6,15 +6,19 @@ import { environment } from 'src/environments/environment';
 import { ProfileService } from './profile.service';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class AuthService {
-    apiUrl = environment.apiUrl
+    apiUrl = environment.apiUrl;
 
-    constructor(private http: HttpClient, private profileService: ProfileService, private router: Router) { }
+    constructor(
+        private http: HttpClient,
+        private profileService: ProfileService,
+        private router: Router
+    ) {}
 
     public isAuthenticated(): Boolean {
-        let userData = localStorage.getItem('app-token')
+        let userData = localStorage.getItem('app-token');
         if (userData && JSON.parse(userData)) {
             return true;
         }
@@ -22,10 +26,20 @@ export class AuthService {
     }
 
     public login(email: string, password: string) {
-        return this.http.post(this.apiUrl + '/auth/login', { 'username': email, 'password': password })
-            .pipe(
-                map((item: any) => this.setAuthFromLocalStorage(item))
-            )
+        return this.http
+            .post(this.apiUrl + '/auth/login', {
+                username: email,
+                password: password,
+            })
+            .pipe(map((item: any) => this.setAuthFromLocalStorage(item)));
+    }
+
+    public register(username: string, password: string, email: string) {
+        return this.http.post(this.apiUrl + '/auth/signup', {
+            username,
+            password,
+            email,
+        });
     }
 
     public logout() {
