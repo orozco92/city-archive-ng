@@ -5,26 +5,26 @@ import { Table } from 'primeng/table';
 import { MessageServiceSeverityEnum } from 'src/app/core/AppConstants';
 import { CrudComponentBase } from 'src/app/core/components/CrudComponentBase';
 import { IApiListQuery } from 'src/app/core/interfaces/IApiListResult';
-import { PublicFundsService } from 'src/app/core/services/public-funds.service';
+import { NewsService } from 'src/app/core/services/news.service';
 
 @Component({
-    selector: 'app-admin-public-funds',
-    templateUrl: './admin-public-funds.component.html',
+    selector: 'app-admin-news',
+    templateUrl: './admin-news.component.html',
 })
-export class AdminPublicFundsComponent extends CrudComponentBase {
+export class AdminNewsComponent extends CrudComponentBase {
     @ViewChild(Table) table!: Table;
 
     constructor(
         injector: Injector,
         private router: Router,
-        private publicFundsService: PublicFundsService
+        private newsService: NewsService
     ) {
         super(injector);
     }
 
     loadData(event?: LazyLoadEvent) {
         this.dataListHelper.loading = true;
-        let order = 'catalogue:asc';
+        let order = 'endDate:desc';
         if (event?.sortField) {
             order =
                 event?.sortField +
@@ -41,7 +41,7 @@ export class AdminPublicFundsComponent extends CrudComponentBase {
             q.search = this.dataListHelper.searchText;
         }
         this.dataListHelper.loading = false;
-        this.publicFundsService.list(q).subscribe((data) => {
+        this.newsService.list(q).subscribe((data) => {
             this.dataListHelper.rows = data.rows;
             this.dataListHelper.totalRowsCount = data.count;
             this.dataListHelper.loading = false;
@@ -49,9 +49,9 @@ export class AdminPublicFundsComponent extends CrudComponentBase {
     }
 
     deleteItem(item: any) {
-        this.publicFundsService.delete(item.id).subscribe((data) => {
+        this.newsService.delete(item.id).subscribe((data) => {
             this.message.add({
-                summary: 'Fondo público eliminado',
+                summary: 'Noticia eliminada',
                 severity: MessageServiceSeverityEnum.SUCCESS,
             });
             this.table.reset();

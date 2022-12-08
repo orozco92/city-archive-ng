@@ -1,0 +1,26 @@
+<div class="surface-card p-4 shadow-2 border-round">
+    <div
+        class="text-3xl font-medium text-900 mb-3 flex justify-content-between"
+    >
+        {{ news?.title }}
+        <button
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-times"
+            class="p-button-rounded p-button-secondary p-button-text"
+            (click)="back()"
+        ></button>
+    </div>
+    <div [innerHtml]="news?.description"></div>
+    <div class="border-2 border-dashed surface-border mt-5 pt-2 grid">
+        <div class="col" *ngFor="let item of news?.Archives">
+            <p-image
+                [src]="apiUrl + item.path"
+                alt="Image"
+                width="250"
+                [preview]="true"
+            ></p-image>
+        </div>
+    </div>
+</div>

@@ -69,6 +69,10 @@ export class PublicHeaderComponent implements OnInit {
                 label: 'Servicios',
             },
             {
+                url: '/news',
+                label: 'Noticias',
+            },
+            {
                 url: '/about-us',
                 label: 'Sobre nosotros',
             },

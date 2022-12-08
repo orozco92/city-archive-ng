@@ -1,18 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IPublicFund } from '../models/public-fund';
+import { INews } from '../models/news';
 import { DefaultCrudService } from './default-crud.service';
 
 @Injectable({
     providedIn: 'root',
 })
-export class PublicFundsService extends DefaultCrudService<IPublicFund> {
+export class NewsService extends DefaultCrudService<INews> {
     uploadUrl: string;
 
     constructor(http: HttpClient) {
         super(http);
-        this.uploadUrl = this.apiUrl + '/archives/public-funds';
-        this.apiUrl += '/public-funds';
+        this.uploadUrl = this.apiUrl + '/archives/news';
+        this.apiUrl += '/news';
     }
 
     upload(id: number, files: File[]) {
