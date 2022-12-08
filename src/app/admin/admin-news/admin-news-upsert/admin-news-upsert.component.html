@@ -1,0 +1,109 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-6 py-6">
+            <h5>{{ news.id ? "Editar" : "Nueva" }} noticia</h5>
+            <div class="p-fluid formgrid grid">
+                <div class="field col-12 md:col-8">
+                    <label for="title">Título</label>
+                    <input
+                        type="text"
+                        pInputText
+                        id="title"
+                        name="title"
+                        [(ngModel)]="news.title"
+                        required
+                        autofocus
+                    />
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label for="date">Fecha extrema</label>
+                    <p-calendar
+                        inputId="date"
+                        [(ngModel)]="news.endDate"
+                        [required]="true"
+                    ></p-calendar>
+                </div>
+            </div>
+            <div class="p-fluid formgrid grid">
+                <div class="field col">
+                    <label for="description">Description</label>
+                    <p-editor
+                        id="description"
+                        [(ngModel)]="news.description"
+                        required
+                        [style]="{ height: '320px' }"
+                    ></p-editor>
+                </div>
+            </div>
+            <div class="field" *ngIf="news.id">
+                <p-fileUpload
+                    name="files[]"
+                    [customUpload]="true"
+                    [multiple]="true"
+                    mode="advanced"
+                    chooseLabel="Agregar"
+                    uploadLabel="Subir archivos"
+                    cancelLabel="Cancelar"
+                    (uploadHandler)="uploadFiles($event.files)"
+                    [files]="files"
+                >
+                    <ng-template pTemplate="content">
+                        <ul *ngIf="news.files?.length">
+                            <li *ngFor="let file of news.files">
+                                {{ file.name }} - {{ file.size }} bytes
+                            </li>
+                        </ul>
+                    </ng-template>
+                </p-fileUpload>
+            </div>
+            <div class="field" *ngIf="news.id && news.Archives.length">
+                <p-panel>
+                    <ng-template pTemplate="header"> Imágenes </ng-template>
+                    <div class="grid">
+                        <div
+                            class="col relative"
+                            *ngFor="let item of news.Archives"
+                        >
+                            <p-image
+                                [src]="apiUrl + item.path"
+                                alt="Image"
+                                width="250"
+                                [preview]="true"
+                            >
+                            </p-image>
+                            <div
+                                class="absolute top-0 left-0 flex align-items-center justify-content-center"
+                            >
+                                <button
+                                    pButton
+                                    pRipple
+                                    icon="pi pi-times"
+                                    class="p-button-rounded"
+                                    (click)="deleteFile(item)"
+                                ></button>
+                            </div>
+                        </div>
+                    </div>
+                </p-panel>
+            </div>
+            <div class="p-card-footer">
+                <button
+                    pButton
+                    pRipple
+                    label="Guardar"
+                    icon="pi pi-check"
+                    class="mr-5"
+                    (click)="saveChanges()"
+                ></button>
+                <button
+                    pButton
+                    pRipple
+                    label="Cancelar"
+                    icon="pi pi-times"
+                    class="p-button-secondary"
+                    (click)="cancelChanges()"
+                ></button>
+            </div>
+        </div>
+    </div>
+</div>

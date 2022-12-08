@@ -1,0 +1,54 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <h5>Últimas noticias</h5>
+            <p-dataView
+                #dv
+                [value]="dataListHelper.rows"
+                [paginator]="true"
+                layout="grid"
+                [rows]="dataListHelper.defaultRowsCountPerPage"
+                [totalRecords]="dataListHelper.totalRowsCount"
+                [lazy]="true"
+                (onLazyLoad)="loadData($event)"
+            >
+                <ng-template pTemplate="header">
+                    <div
+                        class="grid grid-nogutter flex-column md:flex-row justify-content-between"
+                    >
+                        <span class="p-input-icon-left mb-2 md:mb-0">
+                            <i class="pi pi-search"></i>
+                            <input
+                                type="search"
+                                pInputText
+                                [(ngModel)]="dataListHelper.searchText"
+                                placeholder="Buscar"
+                                (input)="searchDelay()"
+                            />
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template let-item pTemplate="gridItem">
+                    <div class="col-12 md:col-4">
+                        <div
+                            class="card m-3 border-1 surface-border px-0 pb-3 pt-0"
+                        >
+                            <a [routerLink]="'/news/' + item.id">
+                                <div class="text-center">
+                                    <img
+                                        [src]="apiUrl + item.Archives[0]?.path"
+                                        [alt]="item.title"
+                                        class="w-9 shadow-2 my-3 mx-0"
+                                    />
+                                    <div class="text-2xl font-bold">
+                                        {{ item.title }}
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-dataView>
+        </div>
+    </div>
+</div>

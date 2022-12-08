@@ -32,14 +32,19 @@ export class AppMenuComponent implements OnInit {
                             routerLink: ['/admin/informative-services'],
                         },
                         {
+                            label: 'Solicitudes de servicio',
+                            icon: PrimeIcons.TICKET,
+                            routerLink: ['/admin/service-request'],
+                        },
+                        {
                             label: 'Fondos publicos',
                             icon: PrimeIcons.BOOK,
                             routerLink: ['/admin/public-funds'],
                         },
                         {
-                            label: 'Solicitudes de servicio',
-                            icon: PrimeIcons.TICKET,
-                            routerLink: ['/admin/service-request'],
+                            label: 'Noticias',
+                            icon: PrimeIcons.IMAGES,
+                            routerLink: ['/admin/news'],
                         },
                         {
                             label: 'Usuarios',
@@ -60,9 +65,9 @@ export class AppMenuComponent implements OnInit {
                             routerLink: ['/admin/public-funds'],
                         },
                         {
-                            label: 'Solicitudes de servicio',
-                            icon: PrimeIcons.TICKET,
-                            routerLink: ['/admin/service-request'],
+                            label: 'Noticias',
+                            icon: PrimeIcons.IMAGES,
+                            routerLink: ['/admin/news'],
                         },
                     ],
                 },

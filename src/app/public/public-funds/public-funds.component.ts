@@ -8,6 +8,7 @@ import { PublicFundsService } from 'src/app/core/services/public-funds.service';
 import { IPublicFund } from 'src/app/core/models/public-fund';
 import { Menu } from 'primeng/menu';
 import { environment } from 'src/environments/environment';
+import { PublicService } from 'src/app/core/services/public.service';
 
 @Component({
     selector: 'app-public-funds',
@@ -19,11 +20,7 @@ export class PublicFundsComponent extends ListComponentBase {
     apiurl = environment.apiUrl;
     @ViewChild('menu') menu!: Menu;
 
-    constructor(
-        injector: Injector,
-        private publicFundsService: PublicFundsService,
-        private router: Router
-    ) {
+    constructor(injector: Injector, private publicService: PublicService) {
         super(injector);
     }
 
@@ -46,7 +43,7 @@ export class PublicFundsComponent extends ListComponentBase {
             q.search = this.dataListHelper.searchText;
         }
         this.dataListHelper.loading = false;
-        this.publicFundsService.list(q).subscribe((data) => {
+        this.publicService.list('public-funds', q).subscribe((data) => {
             this.dataListHelper.rows = data.rows;
             this.dataListHelper.totalRowsCount = data.count;
             this.dataListHelper.loading = false;

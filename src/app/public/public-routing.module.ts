@@ -13,6 +13,7 @@ const routes: Routes = [
             ),
     },
     { path: '', component: LandingComponent },
+    { path: 'news', loadChildren: () => import('./news/news.module').then(m => m.NewsModule) },
 ];
 
 @NgModule({

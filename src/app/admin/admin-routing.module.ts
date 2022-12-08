@@ -38,6 +38,7 @@ const routes: Routes = [
         component: AdminComponent,
         canActivate: [AdminGuardService],
     },
+    { path: 'news', loadChildren: () => import('./admin-news/admin-news.module').then(m => m.AdminNewsModule) },
 ];
 
 @NgModule({
