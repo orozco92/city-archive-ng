@@ -38,6 +38,7 @@ export class InformativeServiceComponent
         const q: IApiListQuery = {
             skip: event?.first ?? 0,
             limit: event?.rows ?? this.dataListHelper.defaultRowsCountPerPage,
+            enabled: 1,
         };
         if (this.dataListHelper.searchText) {
             q.search = this.dataListHelper.searchText;
