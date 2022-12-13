@@ -7,23 +7,22 @@ import { IServiceRequest } from '../models/service-request';
 import { IUser } from '../models/user';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class ProfileService {
-    apiUrl = environment.apiUrl + '/profile'
+    apiUrl = environment.apiUrl + '/profile';
     profile = new Subject<IUser | undefined>();
 
     currentUser: IUser | undefined = undefined;
 
-    constructor(private http: HttpClient) {
-    }
+    constructor(private http: HttpClient) {}
 
     setUser(user?: IUser) {
-        this.currentUser = user
+        this.currentUser = user;
         if (user) {
             localStorage.setItem('profile', JSON.stringify(user));
         } else {
-            localStorage.removeItem('profile')
+            localStorage.removeItem('profile');
         }
         this.profile.next(user);
     }
@@ -31,27 +30,32 @@ export class ProfileService {
     getUser() {
         if (!this.currentUser) {
             let profile = localStorage.getItem('profile');
-            this.currentUser = !!profile ? JSON.parse(profile) : undefined
+            this.currentUser = !!profile ? JSON.parse(profile) : undefined;
         }
         return this.currentUser;
     }
 
     update(data: IUser): Observable<IUser> {
-        return this.http.put<IUser>(this.apiUrl, data)
-            .pipe(tap(data => {
-                this.setUser(data)
+        return this.http.put<IUser>(this.apiUrl, data).pipe(
+            tap((data) => {
+                this.setUser(data);
                 return data;
-            }));
+            })
+        );
     }
 
-    myServices(query: IApiListQuery): Observable<IApiListResult<IServiceRequest>> {
+    myServices(
+        query: IApiListQuery
+    ): Observable<IApiListResult<IServiceRequest>> {
         let params = new HttpParams();
         for (const key in query) {
             if (Object.prototype.hasOwnProperty.call(query, key)) {
-                params = params.append(key, query[key])
+                params = params.append(key, query[key]);
             }
         }
-        return this.http.get<IApiListResult<IServiceRequest>>(this.apiUrl + '/my-services', { params });
+        return this.http.get<IApiListResult<IServiceRequest>>(
+            this.apiUrl + '/my-services',
+            { params }
+        );
     }
-
 }

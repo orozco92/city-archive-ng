@@ -12,7 +12,6 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
     selector: 'app-public-header',
     templateUrl: './public-header.component.html',
     styleUrls: ['./public-header.component.scss'],
-    providers: [ProfileService, AuthService],
 })
 export class PublicHeaderComponent implements OnInit {
     logoUrl = '';
@@ -65,7 +64,7 @@ export class PublicHeaderComponent implements OnInit {
                 url: '/public-funds',
             },
             {
-                url: '/main/services',
+                url: '/services',
                 label: 'Servicios',
             },
             {

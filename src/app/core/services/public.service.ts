@@ -5,10 +5,9 @@ import { environment } from 'src/environments/environment';
 import { IApiListQuery, IApiListResult } from '../interfaces/IApiListResult';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class PublicService {
-
     protected apiUrl: string = environment.apiUrl + '/public';
     protected http: HttpClient;
 
@@ -16,18 +15,23 @@ export class PublicService {
         this.http = http;
     }
 
-    list(path: string, query: IApiListQuery): Observable<IApiListResult<unknown>> {
+    list(
+        path: string,
+        query: IApiListQuery
+    ): Observable<IApiListResult<unknown>> {
         let params = new HttpParams();
         for (const key in query) {
             if (Object.prototype.hasOwnProperty.call(query, key)) {
-                params = params.append(key, query[key])
+                params = params.append(key, query[key]);
             }
         }
-        return this.http.get<IApiListResult<unknown>>(`${this.apiUrl}/${path}`, { params });
+        return this.http.get<IApiListResult<unknown>>(
+            `${this.apiUrl}/${path}`,
+            { params }
+        );
     }
 
     get(path: string, id: string | number): Observable<unknown> {
         return this.http.get<unknown>(`${this.apiUrl}/${path}/${id}`);
     }
-
 }

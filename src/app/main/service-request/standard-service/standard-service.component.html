@@ -1,14 +1,44 @@
 <div class="grid">
     <div class="col-12">
         <div class="card">
-            <h5>Solicitar servicio de {{service.name}}</h5>
+            <h5>Solicitar servicio de {{ service.name }}</h5>
             <form #form="ngForm">
                 <app-profile-personal-data></app-profile-personal-data>
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field col-12">
+                        <label htmlFor="description"
+                            >Detalles de la solicitud</label
+                        >
+                        <textarea
+                            pInputTextarea
+                            id="description"
+                            name="description"
+                            #address="ngModel"
+                            rows="4"
+                            [(ngModel)]="serviceRequest.description"
+                        ></textarea>
+                    </div>
+                </div>
                 <div class="p-card-footer">
-                    <button pButton class="mr-5" label="Solicitar" (click)="save()" [disabled]="form.invalid"></button>
-                    <button pButton class="p-button-secondary mr-5" label="Importar datos desde mi perfil"
-                        (click)="importProfileData()"></button>
-                    <button pButton class="p-button-secondary" label="Cancelar" (click)="back()"></button>
+                    <button
+                        pButton
+                        class="mr-5"
+                        label="Solicitar"
+                        (click)="save()"
+                        [disabled]="form.invalid"
+                    ></button>
+                    <button
+                        pButton
+                        class="p-button-secondary mr-5"
+                        label="Importar datos desde mi perfil"
+                        (click)="importProfileData()"
+                    ></button>
+                    <button
+                        pButton
+                        class="p-button-secondary"
+                        label="Cancelar"
+                        (click)="back()"
+                    ></button>
                 </div>
             </form>
         </div>

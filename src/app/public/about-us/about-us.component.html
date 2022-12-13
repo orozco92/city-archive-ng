@@ -3,35 +3,44 @@
         <!-- <div class="text-blue-600 font-bold mb-3"><i class="pi pi-discord"></i>&nbsp;POWERED BY DISCORD</div> -->
         <div class="text-900 font-bold text-5xl mb-3">Quiénes somos</div>
         <div class="text-700 text-2xl mb-5">
-            El Archivo Histórico Provincial de Holguín es la institución del Ministerio de Ciencia, Tecnología y Medio
-            ambiente encargado de preservar la memoria histórica del territorio holguinero en función de brindar
-            servicios de calidad y satisfacer las necesidades informativas de la ciudadanía, para lo cual cuenta con
-            personal competente y motivado.
+            El Archivo Histórico Provincial de Holguín es la institución del
+            Ministerio de Ciencia, Tecnología y Medio ambiente encargado de
+            preservar la memoria histórica del territorio holguinero en función
+            de brindar servicios de calidad y satisfacer las necesidades
+            informativas de la ciudadanía, para lo cual cuenta con personal
+            competente y motivado.
         </div>
     </div>
 </div>
 <div class="surface-section px-4 py-8 md:px-6 lg:px-8 text-center">
     <div class="mb-3 font-bold text-5xl">
-        <span class="text-900">Que hacemos</span>
+        <span class="text-900">Qué hacemos</span>
     </div>
-    <div class="text-700 text-2xl mb-6">El Archivo Histórico Provincial de Holguín es el encargado de</div>
+    <div class="text-700 text-2xl mb-6">
+        El Archivo Histórico Provincial de Holguín es el encargado de
+    </div>
     <div class="grid justify-content-center">
         <div *ngFor="let item of activities" class="col-12 md:col-4 mb-4 px-5">
-            <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
+            <span
+                class="p-3 shadow-2 mb-3 inline-block surface-card"
+                style="border-radius: 10px"
+            >
                 <i class="pi text-4xl text-blue-500" [ngClass]="item.icon"></i>
             </span>
-            <div class="text-900 mb-3 text-2xl">{{item.title}}</div>
-            <span class="text-700 text-xl line-height-3">{{item.description}}</span>
+            <div class="text-900 mb-3 text-2xl">{{ item.title }}</div>
+            <span class="text-700 text-xl line-height-3">{{
+                item.description
+            }}</span>
         </div>
     </div>
 </div>
 <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
     <div class="text-700 text-center">
-        <!-- <div class="text-blue-600 font-bold mb-3"><i class="pi pi-discord"></i>&nbsp;POWERED BY DISCORD</div> -->
-        <div class="text-900 font-bold text-5xl mb-3">Que queremos lograr</div>
+        <div class="text-900 font-bold text-5xl mb-3">Qué queremos lograr</div>
         <div class="text-700 text-2xl mb-5">
-            Ser institución de alto desempeño en la prestación de servicios informativos con un sistema de gestión
-            integrado que incluye calidad, gestión de capital humano y control interno
+            Ser institución de alto desempeño en la prestación de servicios
+            informativos con un sistema de gestión integrado que incluye
+            calidad, gestión de capital humano y control interno
         </div>
     </div>
 </div>

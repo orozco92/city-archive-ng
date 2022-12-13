@@ -8,10 +8,8 @@ import { TabViewModule } from 'primeng/tabview';
 import { PersonalDataComponent } from './personal-data/personal-data.component';
 import { MyServicesComponent } from './my-services/my-services.component';
 import { FormsModule } from '@angular/forms';
-import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
-import { ProfileService } from 'src/app/core/services/profile.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ProfilePersonalDataModule } from 'src/app/shared/profile-personal-data/profile-personal-data.module';
 
@@ -19,7 +17,7 @@ import { ProfilePersonalDataModule } from 'src/app/shared/profile-personal-data/
     declarations: [
         ProfileComponent,
         PersonalDataComponent,
-        MyServicesComponent
+        MyServicesComponent,
     ],
     imports: [
         CommonModule,
@@ -30,8 +28,8 @@ import { ProfilePersonalDataModule } from 'src/app/shared/profile-personal-data/
         InputTextModule,
         ButtonModule,
         ConfirmDialogModule,
-        ProfilePersonalDataModule
+        ProfilePersonalDataModule,
     ],
-    providers: []
+    providers: [],
 })
-export class ProfileModule { }
+export class ProfileModule {}

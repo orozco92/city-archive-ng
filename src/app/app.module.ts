@@ -3,14 +3,6 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppLayoutModule } from './layout/app.layout.module';
-import { NotfoundComponent } from './demo/components/notfound/notfound.component';
-import { ProductService } from './demo/service/product.service';
-import { CountryService } from './demo/service/country.service';
-import { CustomerService } from './demo/service/customer.service';
-import { EventService } from './demo/service/event.service';
-import { IconService } from './demo/service/icon.service';
-import { NodeService } from './demo/service/node.service';
-import { PhotoService } from './demo/service/photo.service';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { PublicLayoutModule } from './public-layout/public-layout.module';
@@ -19,29 +11,30 @@ import { BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './core/interceptors/jwt-interceptor.service';
+import { ProfileService } from './core/services/profile.service';
 
 @NgModule({
-    declarations: [
-        AppComponent, NotfoundComponent
-    ],
+    declarations: [AppComponent],
     imports: [
         AppRoutingModule,
         AppLayoutModule,
         PublicLayoutModule,
         ToastModule,
         BlockUIModule,
-        ProgressSpinnerModule
+        ProgressSpinnerModule,
     ],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,
             useClass: JwtInterceptor,
-            multi: true
+            multi: true,
         },
         { provide: LocationStrategy, useClass: HashLocationStrategy },
-        CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService, MessageService, ConfirmationService, AppLoadingService
+        MessageService,
+        ConfirmationService,
+        AppLoadingService,
+        ProfileService,
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

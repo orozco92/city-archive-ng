@@ -14,10 +14,12 @@ import { ProfilePersonalDataComponent } from 'src/app/shared/profile-personal-da
 @Component({
     selector: 'app-standard-service',
     templateUrl: './standard-service.component.html',
-    styleUrls: ['./standard-service.component.scss']
+    styleUrls: ['./standard-service.component.scss'],
 })
-export class StandardServiceComponent extends AppComponentBase implements OnInit {
-
+export class StandardServiceComponent
+    extends AppComponentBase
+    implements OnInit
+{
     service: Partial<IInformativeService> = {};
     serviceRequest: Partial<IServiceRequest> = {};
     @ViewChild(ProfilePersonalDataComponent)
@@ -28,7 +30,7 @@ export class StandardServiceComponent extends AppComponentBase implements OnInit
         private serviceRequestService: ServiceRequestService,
         private informativeService: InformativeServiceService,
         private route: ActivatedRoute,
-        private location: Location,
+        private location: Location
     ) {
         super(injector);
     }
@@ -36,38 +38,57 @@ export class StandardServiceComponent extends AppComponentBase implements OnInit
     ngOnInit(): void {
         const serviceId = this.route.snapshot.paramMap.get('serviceId') ?? 0;
         const id = this.route.snapshot.paramMap.get('id') ?? 0;
-        const sub = this.informativeService.get(serviceId)
-            .pipe(switchMap(data => {
-                this.service = data;
-                return !!id
-                    ? this.serviceRequestService.get(id)
-                    : of(false);
-            }))
-            .subscribe(data => {
-                this.profileComponent.setUser(data as ICommonProfileData)
-            })
-        this.subscriptions.push(sub)
+        const sub = this.informativeService
+            .get(serviceId)
+            .pipe(
+                switchMap((data) => {
+                    this.service = data;
+                    return !!id
+                        ? this.serviceRequestService.get(id)
+                        : of(false);
+                })
+            )
+            .subscribe((data) => {
+                this.profileComponent.setUser(data as ICommonProfileData);
+                this.serviceRequest.description = (
+                    data as IServiceRequest
+                ).description;
+            });
+        this.subscriptions.push(sub);
     }
 
     save(): void {
         const summary = 'Solicitud de servicio';
-        Object.assign(this.serviceRequest, this.profileComponent.getUser())
+        Object.assign(this.serviceRequest, this.profileComponent.getUser());
         this.serviceRequest.InformativeServiceId = this.service.id;
-        const sub = this.serviceRequestService.create(this.serviceRequest as IServiceRequest)
+        const sub = this.serviceRequestService
+            .create(this.serviceRequest as IServiceRequest)
             .subscribe({
                 next: (data) => {
                     if (data) {
-                        this.message.add({ summary: summary, detail: 'Solicitus de servicio creada con éxito', severity: MessageServiceSeverityEnum.SUCCESS });
+                        this.message.add({
+                            summary: summary,
+                            detail: 'Solicitus de servicio creada con éxito',
+                            severity: MessageServiceSeverityEnum.SUCCESS,
+                        });
                         this.back();
                     } else {
-                        this.message.add({ summary: summary, detail: 'Ha ocurrido un error al crear la solicitud', severity: MessageServiceSeverityEnum.ERROR });
+                        this.message.add({
+                            summary: summary,
+                            detail: 'Ha ocurrido un error al crear la solicitud',
+                            severity: MessageServiceSeverityEnum.ERROR,
+                        });
                     }
                 },
                 error: () => {
-                    this.message.add({ summary: summary, detail: 'Ha ocurrido un error al crear la solicitud', severity: MessageServiceSeverityEnum.ERROR });
-                }
+                    this.message.add({
+                        summary: summary,
+                        detail: 'Ha ocurrido un error al crear la solicitud',
+                        severity: MessageServiceSeverityEnum.ERROR,
+                    });
+                },
             });
-        this.subscriptions.push(sub)
+        this.subscriptions.push(sub);
     }
 
     importProfileData() {
@@ -75,6 +96,6 @@ export class StandardServiceComponent extends AppComponentBase implements OnInit
     }
 
     back() {
-        this.location.back()
+        this.location.back();
     }
 }

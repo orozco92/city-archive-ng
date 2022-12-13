@@ -12,8 +12,19 @@ const routes: Routes = [
                 (m) => m.PublicFundsModule
             ),
     },
+    {
+        path: 'services',
+        loadChildren: () =>
+            import('./informative-service/informative-service.module').then(
+                (m) => m.InformativeServiceModule
+            ),
+    },
+    {
+        path: 'news',
+        loadChildren: () =>
+            import('./news/news.module').then((m) => m.NewsModule),
+    },
     { path: '', component: LandingComponent },
-    { path: 'news', loadChildren: () => import('./news/news.module').then(m => m.NewsModule) },
 ];
 
 @NgModule({

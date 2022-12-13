@@ -6,6 +6,6 @@ export enum MessageServiceSeverityEnum {
 }
 
 export class AppConstants {
-    static readonly companyName = 'Archivo Historico Provincial de Holguín';
+    static readonly companyName = 'Archivo Histórico Provincial de Holguín';
     static readonly companyNameShort = 'AH';
 }
